@@ -1,4 +1,4 @@
-import { View, Text, Alert, ActivityIndicator, FlatList, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, Alert, ActivityIndicator, FlatList, Image, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import ChartScreen from './ChartScreen';
@@ -7,6 +7,7 @@ import { styles } from './Estilos';
 
 const Clima = () => {
     const [data, setData] = useState(null);
+    const [airQuality, setAirQuality] = useState(null);
     const [load, setLoad] = useState(false);
 
     useEffect(() => {
@@ -17,7 +18,32 @@ const Clima = () => {
                 setLoad(true);
             })
             .catch(err => Alert.alert('Error inesperado : ' + err));
+
+        fetch('http://api.airvisual.com/v2/nearest_city?key=12bc6a9b-50e4-4db3-94ed-58d30440af97')
+            .then(res => res.json())
+            .then(obj => {
+                setAirQuality(obj.data.current.pollution);
+            })
+            .catch(err => Alert.alert('Error al obtener la calidad del aire: ' + err));
     }, []);
+
+    const getAirQualityLevel = (aqi) => {
+        if (aqi <= 50) return 'Bueno';
+        if (aqi <= 100) return 'Moderado';
+        if (aqi <= 150) return 'Dañino para grupos sensibles';
+        if (aqi <= 200) return 'Dañino';
+        if (aqi <= 300) return 'Muy dañino';
+        return 'Peligroso';
+    };
+
+    const getAirQualityColor = (aqi) => {
+        if (aqi <= 50) return '#00e400';
+        if (aqi <= 100) return '#ffff00';
+        if (aqi <= 150) return '#ff7e00';
+        if (aqi <= 200) return '#ff0000';
+        if (aqi <= 300) return '#8f3f97';
+        return '#7e0023';
+    };
 
     const Card = ({ fecha, iko, condicion, min, max }) => {
         return (
@@ -62,17 +88,21 @@ const Clima = () => {
     };
 
     const LScreen = () => {
+        const airQualityLevel = airQuality ? getAirQualityLevel(airQuality.aqius) : '';
+        const airQualityColor = airQuality ? getAirQualityColor(airQuality.aqius) : '#000';
+        const textColor = airQualityColor === '#ffff00' ? '#000' : '#FFF';
+
         return (
             <ScrollView style={styles.scrollContainer}>
                 <View style={styles.datosContainer}>
                     <Text style={styles.lugar}>{data.location.name}</Text>
                     <View>
-                        <View style={[styles.vContainer, { alignItems: 'flex-start', marginBottom: -22 }]}>
+                        <View style={[styles.vContainer, { alignItems: 'center', marginBottom: -22 }]}>
                             <Text style={styles.temperatura}>{data.current.temp_c}</Text>
                             <Text style={[styles.lugar, { marginTop: 18 }]}>°C</Text>
                         </View>
 
-                        <View style={styles.vContainer}>
+                        <View style={[styles.vContainer, { justifyContent: 'center' }]}>
                             <Text style={styles.datosBold}>{data.current.condition.text} </Text>
                             <Text style={styles.datosBold}> {data.forecast.forecastday[0].day.maxtemp_c} °C  </Text>
                             <Text style={styles.texto}>/</Text>
@@ -80,6 +110,14 @@ const Clima = () => {
                         </View>
                     </View>
                 </View>
+
+                {/* Mostrar calidad del aire actual */}
+                {airQuality && (
+                    <View style={[styles.container, { backgroundColor: airQualityColor }]}>
+                        <Text style={styles.title}>Calidad del Aire Actual</Text>
+                        <Text style={[styles.datosBold, { color: textColor }]}>{`AQI: ${airQuality.aqius} - ${airQualityLevel}`}</Text>
+                    </View>
+                )}
 
                 <View style={styles.mapContainer}>
                     <MapView
@@ -102,16 +140,13 @@ const Clima = () => {
                     </MapView>
                 </View>
 
-                {/* Aquí agregamos el ChartScreen */}
+
                 <View style={styles.container}>
                     <Text style={styles.title}>Tendencia de Calidad del Aire</Text>
                     <View style={{ alignItems: 'center' }}>
                         <ChartScreen />
                     </View>
                 </View>
-
-                {/* Aquí agregamos el AirQualityScale */}
-                <AirQualityScale />
 
                 <View style={styles.container}>
                     <Text style={styles.title}>Pronóstico de 5 días</Text>

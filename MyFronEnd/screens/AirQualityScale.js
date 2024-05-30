@@ -11,13 +11,17 @@ const AirQualityScale = () => {
         { level: 'Peligroso', range: '301-500', color: '#7e0023', advice: 'Alerta sanitaria: todos pueden experimentar efectos graves en la salud.' },
     ];
 
+    const getTextColor = (backgroundColor) => {
+        return backgroundColor === '#00e400' || backgroundColor === '#ffff00' ? '#000' : '#FFF';
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Escala de Calidad del Aire</Text>
             {scale.map((item, index) => (
                 <View key={index} style={[styles.scaleItem, { backgroundColor: item.color }]}>
-                    <Text style={styles.level}>{item.level} ({item.range})</Text>
-                    <Text style={styles.advice}>{item.advice}</Text>
+                    <Text style={[styles.level, { color: getTextColor(item.color) }]}>{item.level} ({item.range})</Text>
+                    <Text style={[styles.advice, { color: getTextColor(item.color) }]}>{item.advice}</Text>
                 </View>
             ))}
         </View>
@@ -43,11 +47,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     level: {
-        color: 'white',
         fontWeight: 'bold',
     },
     advice: {
-        color: 'white',
     },
 });
 
