@@ -1,12 +1,13 @@
-// src/NuevoComponente.js
 import React from 'react';
+import Clima from './Clima';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function NuevoComponente() {
-  return (
-    <div>
-      <h1>Hola, soy un nuevo componente!</h1>
-    </div>
-  );
+function App() {
+    return (
+        <div className="App">
+            <Clima />
+        </div>
+    );
 }
 
-export default NuevoComponente;
+export default App;
