@@ -11,7 +11,7 @@ const Clima = () => {
     const [load, setLoad] = useState(false);
 
     useEffect(() => {
-        fetch('http://api.weatherapi.com/v1/forecast.json?key=1fb72a14371346eb839225803230910&q=huejutla&days=5&aqi=yes&alerts=no&lang=es')
+        fetch('http://api.weatherapi.com/v1/forecast.json?key=1fb72a14371346eb839225803230910&q=Mexico City&days=5&aqi=yes&alerts=no&lang=es')
             .then(res => res.json())
             .then(obj => {
                 setData(obj);
@@ -19,7 +19,7 @@ const Clima = () => {
             })
             .catch(err => Alert.alert('Error inesperado : ' + err));
 
-        fetch('http://api.airvisual.com/v2/nearest_city?key=12bc6a9b-50e4-4db3-94ed-58d30440af97')
+        fetch('http://api.airvisual.com/v2/city?city=Mexico City&state=Mexico City&country=Mexico&key=12bc6a9b-50e4-4db3-94ed-58d30440af97')
             .then(res => res.json())
             .then(obj => {
                 setAirQuality(obj.data.current.pollution);
@@ -96,8 +96,8 @@ const Clima = () => {
             <ScrollView style={styles.scrollContainer}>
                 <View style={styles.datosContainer}>
                     <Text style={styles.lugar}>{data.location.name}</Text>
-                    <View>
-                        <View style={[styles.vContainer, { alignItems: 'center', marginBottom: -22 }]}>
+                    <View style={{ alignItems: 'center' }}>
+                        <View style={[styles.vContainer, { alignItems: 'center' }]}>
                             <Text style={styles.temperatura}>{data.current.temp_c}</Text>
                             <Text style={[styles.lugar, { marginTop: 18 }]}>°C</Text>
                         </View>
@@ -123,16 +123,16 @@ const Clima = () => {
                     <MapView
                         style={styles.map}
                         initialRegion={{
-                            latitude: data.location.lat,
-                            longitude: data.location.lon,
+                            latitude: 19.432608,
+                            longitude: -99.133209,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
                     >
                         <Marker
                             coordinate={{
-                                latitude: data.location.lat,
-                                longitude: data.location.lon,
+                                latitude: 19.432608,
+                                longitude: -99.133209,
                             }}
                             title={data.location.name}
                             description={`Temperatura actual: ${data.current.temp_c}°C`}
