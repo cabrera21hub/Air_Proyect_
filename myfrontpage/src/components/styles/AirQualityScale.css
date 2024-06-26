@@ -1,0 +1,24 @@
+.scale-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.scale {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.scale-level {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.scale-level p {
+  margin: 5px 0;
+}

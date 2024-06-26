@@ -21,14 +21,6 @@ const HomeScreen = ({ navigation }) => {
         title="Mostrar Gráficos"
         onPress={() => navigation.navigate('Charts')}
       />
-      <Button
-        title="Predicciones"
-        onPress={() => navigation.navigate('Prediction')}
-      />
-       <Button
-        title="Clima_Prediccion"
-        onPress={() => navigation.navigate('Clima')}
-      />
     </View>
   );
 };
