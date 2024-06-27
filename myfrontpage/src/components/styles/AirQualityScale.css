@@ -1,24 +1,63 @@
 .scale-container {
-  text-align: center;
-  margin: 20px 0;
+  width: 90%;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.scale {
+.scale-title {
+  color: #002366;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scale-item {
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.level {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.advice {
+  font-size: 16px;
+}
+
+.tips-container {
+  margin-top: 20px;
+}
+
+.tips-title {
+  color: #002366;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.tip-item {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.scale-level {
-  flex: 1;
-  min-width: 100px;
+  align-items: center;
   padding: 10px;
-  margin: 5px;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.scale-level p {
-  margin: 5px 0;
+.tip-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.tip-text {
+  color: #fff;
+  font-size: 16px;
 }

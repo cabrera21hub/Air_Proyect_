@@ -1,42 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import './styles/Home.css';
-import AirQualityScale from './AirQualityScale';
 import AirQualityChart from './AirQualityChart';
+import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID } from '../config';
+import '..//components/styles/Home.css';
 
 const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
+  const [airQualityData, setAirQualityData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulación de llamada a la API
-    setTimeout(() => {
-      setWeatherData({
-        temperature: 24,
-        humidity: 50,
-        condition: 'Soleado',
-      });
-    }, 1000);
+    const fetchWeatherData = async () => {
+      try {
+        const response = await fetch(`${WEATHER_API_URL}?id=${CITY_ID}&appid=${WEATHER_API_KEY}&units=metric`);
+        const data = await response.json();
+        setWeatherData(data);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    const fetchForecastData = async () => {
+      try {
+        const response = await fetch(`${WEATHER_API_URL}/forecast?id=${CITY_ID}&appid=${WEATHER_API_KEY}&units=metric&cnt=40`);
+        const data = await response.json();
+        setForecastData(data);
+      } catch (error) {
+        console.error('Error fetching forecast data:', error);
+      }
+    };
+
+    const fetchAirQualityData = async () => {
+      try {
+        const response = await fetch('http://api.airvisual.com/v2/city?city=Mexico City&state=Mexico City&country=Mexico&key=12bc6a9b-50e4-4db3-94ed-58d30440af97');
+        const data = await response.json();
+        setAirQualityData(data.data.current.pollution);
+      } catch (error) {
+        console.error('Error fetching air quality data:', error);
+      }
+    };
+
+    Promise.all([fetchWeatherData(), fetchForecastData(), fetchAirQualityData()]).then(() => setLoading(false));
   }, []);
+
+  const getAirQualityColor = (aqi) => {
+    if (aqi <= 50) return '#00e400';
+    if (aqi <= 100) return '#ffff00';
+    if (aqi <= 150) return '#ff7e00';
+    if (aqi <= 200) return '#ff0000';
+    if (aqi <= 300) return '#8f3f97';
+    return '#7e0023';
+  };
+
+  const getAirQualityText = (aqi) => {
+    if (aqi <= 50) return 'Bueno';
+    if (aqi <= 100) return 'Moderado';
+    if (aqi <= 150) return 'Dañino para grupos sensibles';
+    if (aqi <= 200) return 'Dañino';
+    if (aqi <= 300) return 'Muy dañino';
+    return 'Peligroso';
+  };
+
+  if (loading) {
+    return <div>Cargando datos...</div>;
+  }
 
   return (
     <div className="home-container">
-      <div className="home-content">
-        <h1 className="home-title">Bienvenido a la App de Calidad del Aire</h1>
-        <p className="home-text">Consulta la calidad del aire en tu ciudad y recibe predicciones diarias.</p>
+      <div className="home-header">
+        <h1 className="home-title">Calidad del Aire en Ciudad de México</h1>
       </div>
-      
-      <AirQualityScale />
 
-      <div className="clima-container">
-        <h1 className="clima-title">Predicción del Clima</h1>
-        {weatherData ? (
-          <div className="weather-info">
-            <p>Temperatura: {weatherData.temperature}°C</p>
-            <p>Humedad: {weatherData.humidity}%</p>
-            <p>Condición: {weatherData.condition}</p>
+      <div className="data-summary">
+        <div className="data-item">
+          <span className="data-value">{weatherData?.main?.temp ?? '--'}°C</span>
+          <span className="data-label">Temperatura</span>
+        </div>
+        <div className="data-item">
+          <span className="data-value">{weatherData?.main?.humidity ?? '--'}%</span>
+          <span className="data-label">Humedad</span>
+        </div>
+        <div className="data-item">
+          <span className="data-value">{airQualityData?.aqius ?? '--'}</span>
+          <span className="data-label">AQI</span>
+        </div>
+      </div>
+
+      <div className="air-quality-container" style={{ backgroundColor: airQualityData ? getAirQualityColor(airQualityData.aqius) : '#fff' }}>
+        <h1 className="air-quality-title">Calidad del Aire Actual</h1>
+        {airQualityData ? (
+          <div className="air-quality-info">
+            <p>AQI: {airQualityData.aqius}</p>
+            <p>Estado: {getAirQualityText(airQualityData.aqius)}</p>
           </div>
         ) : (
           <p>Cargando datos...</p>
         )}
+      </div>
+
+      <div className="clima-map-container">
         <div className="map">
           <iframe
             title="map"
@@ -48,9 +110,59 @@ const Home = () => {
             loading="lazy"
           ></iframe>
         </div>
+        <div className="air-quality-chart">
+          <AirQualityChart />
+        </div>
       </div>
 
-      <AirQualityChart />
+      <div className="forecast-container">
+        <h1 className="forecast-title">Pronóstico de 5 Días</h1>
+        {forecastData ? (
+          <div className="forecast-info">
+            {forecastData.list?.slice(0, 5).map((day, index) => (
+              <div key={index} className="forecast-item">
+                <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+                <p>Temperatura Máx: {day.main.temp_max}°C</p>
+                <p>Temperatura Mín: {day.main.temp_min}°C</p>
+                <p>Condición: {day.weather[0].description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Cargando datos del pronóstico...</p>
+        )}
+      </div>
+
+      <div className="forecast-container">
+        <h1 className="forecast-title">Pronóstico de 24 Horas</h1>
+        {forecastData ? (
+          <div className="forecast-info">
+            {forecastData.list?.slice(0, 24).map((hour, index) => (
+              <div key={index} className="forecast-item">
+                <p>{new Date(hour.dt * 1000).toLocaleTimeString()}</p>
+                <p>Temperatura: {hour.main.temp}°C</p>
+                <p>Condición: {hour.weather[0].description}</p>
+                <p>Viento: {hour.wind.speed} m/s</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Cargando datos del pronóstico...</p>
+        )}
+      </div>
+
+      <div className="forecast-container">
+        <h1 className="forecast-title">Pronóstico para Mañana</h1>
+        {forecastData?.list ? (
+          <div className="forecast-info">
+            <p>Condición: {forecastData.list[8].weather[0].description}</p>
+            <p>Temperatura Máx: {forecastData.list[8].main.temp_max}°C</p>
+            <p>Temperatura Mín: {forecastData.list[8].main.temp_min}°C</p>
+          </div>
+        ) : (
+          <p>Cargando datos del pronóstico...</p>
+        )}
+      </div>
 
       <div className="contact-container">
         <h2 className="contact-title">Comunícate con Nosotros</h2>

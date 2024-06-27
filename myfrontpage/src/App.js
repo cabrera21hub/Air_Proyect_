@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import Home from './components/Home';
 import AirQualityScale from './components/AirQualityScale';
 import AboutUs from './components/AboutUs';
@@ -10,9 +10,9 @@ const App = () => {
     <Router>
       <div>
         <nav className="navbar">
-          <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/air-quality-scale">Escala</Link>
-          <Link className="nav-link" to="/about-us">Acerca de Nosotros</Link>
+          <NavLink className="nav-link" to="/" exact activeClassName="nav-link-active">Home</NavLink>
+          <NavLink className="nav-link" to="/air-quality-scale" activeClassName="nav-link-active">Escala</NavLink>
+          <NavLink className="nav-link" to="/about-us" activeClassName="nav-link-active">Acerca de Nosotros</NavLink>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -6,22 +6,54 @@ body {
 }
 
 .navbar {
-  background-color: #333;
+  background-color: #87CEEB; /* Azul claro */
   overflow: hidden;
   display: flex;
   justify-content: center;
   padding: 10px 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link {
-  color: white;
+  color: black; /* Letras negras */
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px; /* Letras más grandes */
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #000; /* Barra negra */
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
 }
 
 .nav-link:hover {
-  background-color: #ddd;
-  color: black;
+  color: #000; /* Mantener las letras negras al hacer hover */
+}
+
+.nav-link-active {
+  color: #000;
+}
+
+.nav-link-active::before {
+  visibility: visible;
+  transform: scaleX(1);
 }
