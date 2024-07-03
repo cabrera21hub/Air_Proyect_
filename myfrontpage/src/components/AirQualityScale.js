@@ -1,5 +1,7 @@
 import React from 'react';
-import '..//components/styles/AirQualityScale.css';
+import '../components/styles/AirQualityScale.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const AirQualityScale = () => {
   const scale = [
@@ -15,39 +17,66 @@ const AirQualityScale = () => {
     return backgroundColor === '#00e400' || backgroundColor === '#ffff00' ? '#000' : '#FFF';
   };
 
-  const handlePress = (advice) => {
-    alert(advice);
-  };
-
   return (
     <div className="scale-container">
-      <h2 className="scale-title">Escala de Calidad del Aire</h2>
-      {scale.map((item, index) => (
-        <div
-          key={index}
-          className="scale-item"
-          style={{ backgroundColor: item.color, color: getTextColor(item.color) }}
-          onClick={() => handlePress(item.advice)}
-        >
-          <p className="level">{item.level} ({item.range})</p>
-          <p className="advice">{item.advice}</p>
+      <div className="scale-content">
+        <div className="scale-section">
+          <h2 className="scale-title">Escala de Calidad del Aire</h2>
+          {scale.map((item, index) => (
+            <div
+              key={index}
+              className="scale-item"
+              style={{ backgroundColor: item.color, color: getTextColor(item.color) }}
+            >
+              <p className="level">{item.level} ({item.range})</p>
+              <p className="advice">{item.advice}</p>
+            </div>
+          ))}
         </div>
-      ))}
-      <div className="tips-container">
-        <h3 className="tips-title">Consejos para Mantenerse Saludable</h3>
-        <div className="tip-item" style={{ backgroundColor: '#4682B4' }}>
-          <img className="tip-icon" src="https://img.icons8.com/ios-filled/50/000000/water.png" alt="water" />
-          <p className="tip-text">Mantente hidratado y evita actividades al aire libre si la calidad del aire es dañina.</p>
-        </div>
-        <div className="tip-item" style={{ backgroundColor: '#4682B4' }}>
-          <img className="tip-icon" src="https://img.icons8.com/?size=100&id=66991&format=png&color=000000" alt="air purifier" />
-          <p className="tip-text">Utiliza purificadores de aire en interiores para mantener un ambiente saludable.</p>
-        </div>
-        <div className="tip-item" style={{ backgroundColor: '#4682B4' }}>
-          <img className="tip-icon" src="https://img.icons8.com/?size=100&id=NkranikRRFwz&format=png&color=000000" alt="mask" />
-          <p className="tip-text">Usa mascarillas N95 para reducir la exposición a contaminantes si la calidad del aire es muy dañina.</p>
+        <div className="tips-section">
+          <h3 className="tips-title">Consejos para Mantenerse Saludable</h3>
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/water.png" alt="water" />
+            <p className="tip-text">Mantente hidratado y evita actividades al aire libre si la calidad del aire es dañina.</p>
+          </div>
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/air-purifier.png" alt="air purifier" />
+            <p className="tip-text">Utiliza purificadores de aire en interiores para mantener un ambiente saludable.</p>
+          </div>
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/protection-mask.png" alt="mask" />
+            <p className="tip-text">Usa mascarillas N95 para reducir la exposición a contaminantes si la calidad del aire es muy dañina.</p>
+          </div>
         </div>
       </div>
+      <div className="more-info">
+        <h3 className="more-info-title">Más Información sobre la Calidad del Aire</h3>
+        <div className="blog-section">
+          <div className="blog-item">
+            <img className="blog-image" src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="Calidad del Aire en CDMX" />
+            <p className="blog-text">La calidad del aire en la Ciudad de México ha mejorado en los últimos años, pero aún es necesario tomar medidas para reducir la contaminación.</p>
+          </div>
+          <div className="blog-item">
+            <img className="blog-image" src="https://valenciaplaza.com/public/Image/2016/8/pap-10-plantas-medicinales-comestibles_NoticiaAmpliada.jpg" alt="Plantas y Calidad del Aire" />
+            <p className="blog-text">Cómo las plantas pueden ayudar a mejorar la calidad del aire en interiores y exteriores.</p>
+          </div>
+          <div className="blog-item">
+          <img className="blog-image" src="https://pensemosverde.com/wp-content/uploads/2017/03/imagen-31.jpg" alt="Ejercicio y Contaminación" />
+            <p className="blog-text">Consejos para protegerte de la contaminación del aire durante el ejercicio al aire libre.</p>
+          </div>
+        </div>
+      </div>
+      <footer className="social-media-footer">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faFacebook} className="social-icon" />
+        </a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faInstagram} className="social-icon" />
+        </a>
+        <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faWhatsapp} className="social-icon" />
+        </a>
+      </footer>
     </div>
   );
 };

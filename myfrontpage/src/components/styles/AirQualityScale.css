@@ -1,46 +1,55 @@
 .scale-container {
   width: 90%;
   margin: 20px auto;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff; /* Texto blanco */
 }
 
-.scale-title {
-  color: #002366;
+.scale-title, .tips-title, .more-info-title {
+  color: #ff0; /* Color amarillo para título */
   font-weight: bold;
-  font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
+  border-bottom: 2px solid #ff0; /* Línea debajo del título */
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.scale-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.scale-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.tips-section {
+  flex: 1;
+  margin-left: 20px;
 }
 
 .scale-item {
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.scale-item:hover {
+  transform: scale(1.05); /* Escala al pasar el mouse */
 }
 
 .level {
   font-weight: bold;
-  font-size: 18px;
-}
-
-.advice {
   font-size: 16px;
 }
 
-.tips-container {
-  margin-top: 20px;
-}
-
-.tips-title {
-  color: #002366;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 15px;
+.advice {
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .tip-item {
@@ -49,6 +58,12 @@
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+  background-color: #333; /* Fondo oscuro para tips */
+  transition: transform 0.3s ease; /* Efecto hover */
+}
+
+.tip-item:hover {
+  transform: scale(1.05); /* Escala al pasar el mouse */
 }
 
 .tip-icon {
@@ -59,5 +74,55 @@
 
 .tip-text {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
+}
+
+.more-info {
+  margin-top: 20px;
+  background-color: #fff; /* Fondo blanco para más información */
+  color: #000; /* Texto negro */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.blog-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-item {
+  flex: 1;
+  margin: 10px;
+  background-color: #f0f0f0; /* Fondo claro para los elementos del blog */
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease; /* Efecto hover */
+}
+
+.blog-item:hover {
+  transform: scale(1.05); /* Escala al pasar el mouse */
+}
+
+.blog-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.blog-text {
+  color: #000;
+  font-size: 14px;
+}
+
+.social-media-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icon {
+  color: #fff;
+  font-size: 2em;
+  margin: 0 15px;
 }

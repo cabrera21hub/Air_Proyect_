@@ -1,59 +1,77 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f8ff;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
-.navbar {
-  background-color: #87CEEB; /* Azul claro */
-  overflow: hidden;
+.header {
   display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #000;
+  border-bottom: 2px solid #fff; /* Hacer la línea divisoria más gruesa */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2em;
+}
+
+.logo-text span:first-child {
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
 }
 
 .nav-link {
-  color: black; /* Letras negras */
-  text-align: center;
-  padding: 14px 20px;
+  color: #fff;
   text-decoration: none;
-  font-size: 20px; /* Letras más grandes */
-  font-weight: bold;
+  margin: 0 15px;
+  font-size: 1.2em;
   position: relative;
-  transition: color 0.3s ease-in-out;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  bottom: 0;
-  left: 0;
-  background-color: #000; /* Barra negra */
-  visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-link:hover::before {
-  visibility: visible;
-  transform: scaleX(1);
 }
 
 .nav-link:hover {
-  color: #000; /* Mantener las letras negras al hacer hover */
+  color: #ff0;
 }
 
-.nav-link-active {
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #ff0;
+  bottom: -5px;
+  left: 0;
+}
+
+.login-button {
+  background-color: #ff0;
   color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 20px;
 }
 
-.nav-link-active::before {
-  visibility: visible;
-  transform: scaleX(1);
+.main-content {
+  padding: 20px;
 }
