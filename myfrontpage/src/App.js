@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react
 import Home from './components/Home';
 import AirQualityScale from './components/AirQualityScale';
 import AboutUs from './components/AboutUs';
+import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 import './App.css';
 import logo from './components/imagenes/1.png'; // Importa la imagen correctamente
 
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/advice" element={<AirQualityScale />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
         </Routes>
       </div>
     </Router>
@@ -37,6 +39,7 @@ const Header = () => {
         <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">INICIO</Link>
         <Link className={`nav-link ${location.pathname === '/advice' ? 'active' : ''}`} to="/advice">CONSEJOS</Link>
         <Link className={`nav-link ${location.pathname === '/about-us' ? 'active' : ''}`} to="/about-us">ACERCA DE NOSOTROS</Link>
+        <Link className={`nav-link ${location.pathname === '/preguntas-frecuentes' ? 'active' : ''}`} to="/preguntas-frecuentes">PREGUNTAS FRECUENTES</Link>
       </nav>
       <button className="login-button">INICIAR SESIÓN</button>
     </header>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID, API_URL } from '../config';
 import '../components/styles/Home.css';
 import CustomAirQualityChart from './CustomAirQualityChart';
@@ -68,7 +69,7 @@ const Home = () => {
           </div>
 
           <p className="city-info">La Ciudad de México es conocida por sus altos niveles de contaminación debido al tráfico vehicular, las fábricas y otras fuentes de emisiones. Esta página está dirigida a monitorear la calidad del aire en esta área y proporcionar información importante para sus residentes.</p>
-          <p className="faq">PREGUNTAS FRECUENTES</p>
+          <Link to="/preguntas-frecuentes" className="faq">PREGUNTAS FRECUENTES</Link>
         </div>
         
         <div className="right-side">
