@@ -55,7 +55,7 @@ const Home = () => {
           </div>
           <h2 className="air-quality-title">¿CALIDAD DEL AIRE?</h2>
           <p className="description">La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</p>
-          
+
           <div className="map-container">
             <iframe
               title="map"
@@ -68,10 +68,12 @@ const Home = () => {
             ></iframe>
           </div>
 
-          <p className="city-info">La Ciudad de México es conocida por sus altos niveles de contaminación debido al tráfico vehicular, las fábricas y otras fuentes de emisiones. Esta página está dirigida a monitorear la calidad del aire en esta área y proporcionar información importante para sus residentes.</p>
-          <Link to="/preguntas-frecuentes" className="faq">PREGUNTAS FRECUENTES</Link>
+          
+          <p className="faq">
+            <Link to="/faq">PREGUNTAS FRECUENTES</Link>
+          </p>
         </div>
-        
+
         <div className="right-side">
           <div className="info-cards-container">
             {weatherData && (

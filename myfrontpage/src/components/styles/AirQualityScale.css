@@ -4,7 +4,7 @@
   color: #fff; /* Texto blanco */
 }
 
-.scale-title, .tips-title, .more-info-title {
+.scale-title, .image-title, .tips-title, .more-info-title {
   color: #ff0; /* Color amarillo para título */
   font-weight: bold;
   text-align: center;
@@ -25,7 +25,7 @@
   margin-right: 20px;
 }
 
-.tips-section {
+.image-section {
   flex: 1;
   margin-left: 20px;
 }
@@ -76,11 +76,17 @@
   color: #fff;
   font-size: 14px;
 }
+.more-info-title {
+  margin-top: 0px;
+  background-color: #000000; /* Fondo blanco para más información */
+  color:#ff0; /* Texto negro */
+  padding: 5px;
+}
 
 .more-info {
   margin-top: 20px;
-  background-color: #fff; /* Fondo blanco para más información */
-  color: #000; /* Texto negro */
+  background-color: #000000; /* Fondo blanco para más información */
+  color: #ffffff; /* Texto negro */
   padding: 20px;
   border-radius: 10px;
 }

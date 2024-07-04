@@ -33,25 +33,8 @@ const AirQualityScale = () => {
             </div>
           ))}
         </div>
-        <div className="tips-section">
-          <h3 className="tips-title">Consejos para Mantenerse Saludable</h3>
-          <div className="tip-item">
-            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/water.png" alt="water" />
-            <p className="tip-text">Mantente hidratado y evita actividades al aire libre si la calidad del aire es dañina.</p>
-          </div>
-          <div className="tip-item">
-            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/air-purifier.png" alt="air purifier" />
-            <p className="tip-text">Utiliza purificadores de aire en interiores para mantener un ambiente saludable.</p>
-          </div>
-          <div className="tip-item">
-            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/protection-mask.png" alt="mask" />
-            <p className="tip-text">Usa mascarillas N95 para reducir la exposición a contaminantes si la calidad del aire es muy dañina.</p>
-          </div>
-        </div>
-      </div>
-      <div className="more-info">
-        <h3 className="more-info-title">Más Información sobre la Calidad del Aire</h3>
-        <div className="blog-section">
+        <div className="image-section">
+          <h3 className="image-title">Imágenes Informativas</h3>
           <div className="blog-item">
             <img className="blog-image" src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="Calidad del Aire en CDMX" />
             <p className="blog-text">La calidad del aire en la Ciudad de México ha mejorado en los últimos años, pero aún es necesario tomar medidas para reducir la contaminación.</p>
@@ -61,8 +44,30 @@ const AirQualityScale = () => {
             <p className="blog-text">Cómo las plantas pueden ayudar a mejorar la calidad del aire en interiores y exteriores.</p>
           </div>
           <div className="blog-item">
-          <img className="blog-image" src="https://pensemosverde.com/wp-content/uploads/2017/03/imagen-31.jpg" alt="Ejercicio y Contaminación" />
+            <img className="blog-image" src="https://pensemosverde.com/wp-content/uploads/2017/03/imagen-31.jpg" alt="Ejercicio y Contaminación" />
             <p className="blog-text">Consejos para protegerte de la contaminación del aire durante el ejercicio al aire libre.</p>
+          </div>
+        </div>
+      </div>
+      <div className="more-info">
+        <h3 className="more-info-title">Consejos para Mantenerse Saludable</h3>
+        <div className="tips-section">
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/water.png" alt="water" />
+            <p className="tip-text">Mantente hidratado y evita actividades al aire libre si la calidad del aire es dañina.</p>
+          </div>
+
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/protection-mask.png" alt="mask" />
+            <p className="tip-text">Usa mascarillas N95 para reducir la exposición a contaminantes si la calidad del aire es muy dañina.</p>
+          </div>
+          <div className="tip-item">
+            <img className="tip-icon" src="https://img.icons8.com/color/96/000000/forest.png" alt="trees" />
+            <p className="tip-text">Planta árboles y mantén áreas verdes para mejorar la calidad del aire en tu comunidad.</p>
+          </div>
+          <div className="tip-item">
+            <img className="tip-icon" src="https://e7.pngegg.com/pngimages/783/363/png-clipart-bicycle-graphics-mountain-bike-cycling-city-cyclist-logo-bicycle.png" alt="car" />
+            <p className="tip-text">Utiliza transporte público, bicicleta o camina para reducir la contaminación vehicular.</p>
           </div>
         </div>
       </div>
