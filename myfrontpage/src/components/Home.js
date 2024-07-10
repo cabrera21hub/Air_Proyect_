@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID, API_URL } from '../config';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
+import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID } from '../config';
 import '../components/styles/Home.css';
-import CustomAirQualityChart from './CustomAirQualityChart';
-import locationIcon from '../components/imagenes/12.webp'; // Importa la imagen
+import Grafica_Air from './Grafica_Air';
+import locationIcon from '../components/imagenes/12.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -22,19 +27,23 @@ const Home = () => {
       }
     };
 
-    const fetchAirQualityData = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        setAirQualityData(data.data.current.pollution);
-      } catch (error) {
-        console.error('Error fetching air quality data:', error);
-      }
-    };
-
     fetchWeatherData();
-    fetchAirQualityData();
   }, []);
+
+  const handleDateChange = async (date) => {
+    setSelectedDate(date);
+    const formattedDate = date.toISOString().split('T')[0];
+    console.log('Selected date:', formattedDate);
+
+    try {
+      const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
+      console.log('API response:', response.data);
+      setAirQualityData(response.data);
+      setChartData([response.data]); // Pasar los datos en un array
+    } catch (error) {
+      console.error('Error fetching air quality data:', error);
+    }
+  };
 
   const getAirQualityColor = (aqi) => {
     if (aqi <= 50) return '#00e400';
@@ -68,6 +77,10 @@ const Home = () => {
             ></iframe>
           </div>
 
+          <div className="date-picker-container">
+            <DatePicker selected={selectedDate} onChange={handleDateChange} dateFormat="yyyy-MM-dd" />
+          </div>
+
           <p className="faq">
             <Link to="/faq">PREGUNTAS FRECUENTES</Link>
           </p>
@@ -94,8 +107,9 @@ const Home = () => {
             {airQualityData && (
               <div className="info-card-container">
                 <h3>CALIDAD DEL AIRE:</h3>
-                <div className="info-card" style={{ backgroundColor: getAirQualityColor(airQualityData.aqius) }}>
-                  <p>{airQualityData.aqius} AQI - {airQualityData.mainus}</p>
+                <div className="info-card">
+                  <p>Real PM2.5: {airQualityData.real_pm25}</p>
+                  <p>Predicted PM2.5: {airQualityData.predicted_pm25}</p>
                 </div>
               </div>
             )}
@@ -103,7 +117,7 @@ const Home = () => {
 
           <div className="chart-info-container">
             <div className="chart-container">
-              <CustomAirQualityChart />
+              {chartData && <Grafica_Air data={chartData} />}
             </div>
 
             <div className="quality-info">

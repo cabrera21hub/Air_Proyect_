@@ -1,6 +1,6 @@
 import os
 import joblib
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from rest_framework.views import APIView
 import pandas as pd
 
@@ -10,7 +10,7 @@ class CalidadAireView(APIView):
             base_dir = os.path.dirname(__file__)
             model_path = os.path.join(base_dir, 'models', 'modelo_entrenado.pkl')
             scaler_path = os.path.join(base_dir, 'models', 'scaler.pkl')
-            csv_path = os.path.join(base_dir, 'models', 'predicciones.csv')
+            csv_path = os.path.join(base_dir, 'models', 'predicciones_2024.csv')
             
             # Imprimir rutas para depuración
             print(f"Model path: {model_path}")
@@ -52,7 +52,6 @@ class CalidadAireView(APIView):
                 fecha = pd.Timestamp(df['Fecha'].values[0])
                 result = {
                     'fecha': fecha.strftime("%Y-%m-%d"),
-                    'real_pm25': df['Real_PM2.5'].values[0],
                     'predicted_pm25': df['Predicted_PM2.5'].values[0]
                 }
             else:
