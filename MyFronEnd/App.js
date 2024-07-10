@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'; // Asegúrate de importar los iconos
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './screens/HomeScreen';
 import WeatherScreen from './screens/WeatherScreen';
@@ -11,8 +11,9 @@ import ChartScreen from './screens/ChartScreen';
 import PredictionScreen from './screens/PredictionScreen';
 import Clima from './screens/Clima';
 import AirQualityScale from './screens/AirQualityScale';
-import AboutUsScreen from './screens/AboutUsScreen'; // Asegúrate de que la ruta sea correcta
-import DatosScreen from './screens/DatosScreen'; // Nueva pantalla de datos
+import AboutUsScreen from './screens/AboutUsScreen';
+import DatosScreen from './screens/DatosScreen';
+import RestrictedCalendar from './screens/RestrictedCalendar';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen 
+          name="Home" 
+          component={HomeStack} 
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="home" color={color} size={size} />
+            ),
+          }}
+        />
         <Tab.Screen 
           name="Clima" 
           component={Clima} 
@@ -67,6 +78,16 @@ const App = () => {
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <Icon name="people" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Calendario" 
+          component={RestrictedCalendar} 
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="calendar" color={color} size={size} />
             ),
           }}
         />

@@ -68,7 +68,6 @@ const Home = () => {
             ></iframe>
           </div>
 
-          
           <p className="faq">
             <Link to="/faq">PREGUNTAS FRECUENTES</Link>
           </p>
