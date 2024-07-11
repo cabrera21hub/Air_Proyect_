@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
-import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID } from '../config';
+import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID, API_URL } from '../config';
+import { addDays, isBefore, isAfter, startOfDay, endOfDay } from 'date-fns';
 import '../components/styles/Home.css';
 import Grafica_Air from './Grafica_Air';
 import locationIcon from '../components/imagenes/12.webp';
@@ -14,7 +15,8 @@ const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState([]);
+  const [currentAirQuality, setCurrentAirQuality] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -30,20 +32,37 @@ const Home = () => {
     fetchWeatherData();
   }, []);
 
-  const handleDateChange = async (date) => {
-    setSelectedDate(date);
-    const formattedDate = date.toISOString().split('T')[0];
-    console.log('Selected date:', formattedDate);
+  useEffect(() => {
+    const fetchAirQualityData = async () => {
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      console.log('Selected date:', formattedDate);
 
-    try {
-      const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
-      console.log('API response:', response.data);
-      setAirQualityData(response.data);
-      setChartData([response.data]); // Pasar los datos en un array
-    } catch (error) {
-      console.error('Error fetching air quality data:', error);
-    }
-  };
+      try {
+        const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
+        console.log('API response:', response.data);
+        setAirQualityData(response.data);
+        setChartData([response.data]); // Asegúrate de que esto pase un array
+      } catch (error) {
+        console.error('Error fetching air quality data:', error);
+      }
+    };
+
+    fetchAirQualityData();
+  }, [selectedDate]);
+
+  useEffect(() => {
+    const fetchCurrentAirQuality = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        setCurrentAirQuality(data.data.current.pollution);
+      } catch (error) {
+        console.error('Error fetching current air quality data:', error);
+      }
+    };
+
+    fetchCurrentAirQuality();
+  }, []);
 
   const getAirQualityColor = (aqi) => {
     if (aqi <= 50) return '#00e400';
@@ -52,6 +71,15 @@ const Home = () => {
     if (aqi <= 200) return '#ff0000';
     if (aqi <= 300) return '#8f3f97';
     return '#7e0023';
+  };
+
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
+      const today = startOfDay(new Date());
+      const fiveDaysFromNow = endOfDay(addDays(today, 4));
+      return isBefore(date, today) || isAfter(date, fiveDaysFromNow);
+    }
+    return false;
   };
 
   return (
@@ -77,10 +105,6 @@ const Home = () => {
             ></iframe>
           </div>
 
-          <div className="date-picker-container">
-            <DatePicker selected={selectedDate} onChange={handleDateChange} dateFormat="yyyy-MM-dd" />
-          </div>
-
           <p className="faq">
             <Link to="/faq">PREGUNTAS FRECUENTES</Link>
           </p>
@@ -104,37 +128,46 @@ const Home = () => {
                 </div>
               </>
             )}
-            {airQualityData && (
+            {currentAirQuality && (
               <div className="info-card-container">
                 <h3>CALIDAD DEL AIRE:</h3>
-                <div className="info-card">
-                  <p>Real PM2.5: {airQualityData.real_pm25}</p>
-                  <p>Predicted PM2.5: {airQualityData.predicted_pm25}</p>
+                <div className="info-card" style={{ backgroundColor: getAirQualityColor(currentAirQuality.aqius) }}>
+                  <p>AQI - {currentAirQuality.aqius}</p>
                 </div>
               </div>
             )}
           </div>
 
           <div className="chart-info-container">
-            <div className="chart-container">
-              {chartData && <Grafica_Air data={chartData} />}
+            <div className="chart-title-container">
+              <h3 className="chart-title">GRAFICA DE LA CALIDAD DEL AIRE ESTA SEMANA</h3>
+              <div className="chart-container">
+                {chartData && <Grafica_Air data={chartData} />}
+              </div>
             </div>
 
-            <div className="quality-info">
-              <h4 className="quality-title">ACEPTABLE</h4>
-              <p>Contaminante(s): O3, PM2.5</p>
-              <p>Riesgo: MODERADO</p>
-              <p>Recomendaciones para:</p>
-              <ul>
-                <li>Grupo Sensibles: Considera reducir las actividades físicas vigorosas al aire libre.</li>
-                <li>Para toda la población: Disfruta las actividades al aire libre.</li>
-              </ul>
-              <p>Índice anterior:</p>
-              <p>Regular</p>
-              <p>Contaminante: PM2.5</p>
-              <p>Índice: 62</p>
-              <p>Estación: CAM-Camarones</p>
+            <div className="date-picker-container">
+              <h3 className="chart-title">SELECCIONE EL DÍA QUE DESEE OBSERVAR EL PRONÓSTICO</h3>
+              <Calendar
+                onChange={setSelectedDate}
+                value={selectedDate}
+                tileDisabled={tileDisabled}
+              />
             </div>
+          </div>
+
+          <div className="forecast-container">
+            <h3 className="chart-title">PRONÓSTICO DEL DÍA SELECCIONADO</h3>
+            {airQualityData ? (
+              <div className="forecast-day">
+                <p>Real PM2.5: {airQualityData.real_pm25}</p>
+                <p>Predicted PM2.5: {airQualityData.predicted_pm25}</p>
+                <p>AQI: {airQualityData.aqi}</p>
+                <p>Level: {airQualityData.level}</p>
+              </div>
+            ) : (
+              <p>No hay datos de pronóstico disponibles.</p>
+            )}
           </div>
         </div>
       </main>

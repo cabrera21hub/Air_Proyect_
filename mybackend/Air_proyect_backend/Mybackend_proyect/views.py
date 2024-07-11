@@ -12,7 +12,7 @@ class CalidadAireView(APIView):
             scaler_path = os.path.join(base_dir, 'models', 'scaler.pkl')
             csv_path = os.path.join(base_dir, 'models', 'predicciones_2024.csv')
             
-            # Imprimir rutas para depuración
+            # Imprimir rutas para depuraciï¿½n
             print(f"Model path: {model_path}")
             print(f"Scaler path: {scaler_path}")
             print(f"CSV path: {csv_path}")
@@ -36,7 +36,7 @@ class CalidadAireView(APIView):
             print(data.head())
             print(data.dtypes)
 
-            # Verificar y convertir la fecha del parámetro de la URL a datetime
+            # Verificar y convertir la fecha del parï¿½metro de la URL a datetime
             try:
                 date = pd.to_datetime(date, format="%Y-%m-%d")
                 print(f"Converted date: {date}")
