@@ -10,13 +10,24 @@ import Grafica_Air from './Grafica_Air';
 import locationIcon from '../components/imagenes/12.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import Modal from 'react-modal';
+import Pronostico from './Pronostico';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+
+Modal.setAppElement('#root'); // Establecer el elemento raíz para accesibilidad
 
 const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState(null);
   const [currentAirQuality, setCurrentAirQuality] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [historicalYearData, setHistoricalYearData] = useState([]);
+  const [historicalMonthData, setHistoricalMonthData] = useState([]);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -41,7 +52,7 @@ const Home = () => {
         const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
         console.log('API response:', response.data);
         setAirQualityData(response.data);
-        setChartData([response.data]); // Asegúrate de que esto pase un array
+        setChartData([response.data]);
       } catch (error) {
         console.error('Error fetching air quality data:', error);
       }
@@ -80,6 +91,31 @@ const Home = () => {
       return isBefore(date, today) || isAfter(date, fiveDaysFromNow);
     }
     return false;
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const renderChart = (data, title) => {
+    return <Grafica_Air data={data} title={title} />;
+  };
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    doc.autoTable({ html: '#historicalYearTable' });
+    doc.save('historical_year_data.pdf');
+  };
+
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(historicalYearData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos Anuales');
+    XLSX.writeFile(workbook, 'historical_year_data.xlsx');
   };
 
   return (
@@ -153,24 +189,55 @@ const Home = () => {
                 value={selectedDate}
                 tileDisabled={tileDisabled}
               />
+              {airQualityData ? (
+                <div className="forecast-day">
+                  <button onClick={openModal}>Ver Pronóstico</button>
+                </div>
+              ) : (
+                <p>No hay datos de pronóstico disponibles.</p>
+              )}
             </div>
           </div>
-
-          <div className="forecast-container">
-            <h3 className="chart-title">PRONÓSTICO DEL DÍA SELECCIONADO</h3>
-            {airQualityData ? (
-              <div className="forecast-day">
-                <p>Real PM2.5: {airQualityData.real_pm25}</p>
-                <p>Predicted PM2.5: {airQualityData.predicted_pm25}</p>
-                <p>AQI: {airQualityData.aqi}</p>
-                <p>Level: {airQualityData.level}</p>
-              </div>
-            ) : (
-              <p>No hay datos de pronóstico disponibles.</p>
-            )}
+          
+          <div className="yearly-chart-container">
+            <h3 className="chart-title">Datos Históricos del Año</h3>
+            {renderChart(historicalYearData, 'Datos Anuales')}
+            <button onClick={downloadPDF}>Descargar PDF</button>
+            <button onClick={downloadExcel}>Descargar Excel</button>
+          </div>
+          
+          <div className="monthly-chart-container">
+            <h3 className="chart-title">Datos Históricos del Mes</h3>
+            {renderChart(historicalMonthData, 'Datos Mensuales')}
           </div>
         </div>
       </main>
+
+      <section className="blog-section">
+        <div className="blog-posts">
+          <div className="blog-post">
+            <img src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="¿Cómo afecta la calidad del aire a la salud?" className="blog-image" />
+            <div className="blog-content">
+              <h3 className="blog-post-title">¿Cómo afecta la calidad del aire a la salud?</h3>
+              <p className="blog-post-content">La mala calidad del aire puede causar enfermedades respiratorias, cardiovasculares y otros problemas de salud. Es importante conocer los niveles de contaminación y tomar medidas para protegerse.</p>
+            </div>
+          </div>
+          <div className="blog-post">
+            <img src="https://valenciaplaza.com/public/Image/2016/8/pap-10-plantas-medicinales-comestibles_NoticiaAmpliada.jpg" alt="Consejos para mejorar la calidad del aire en interiores" className="blog-image" />
+            <div className="blog-content">
+              <h3 className="blog-post-title">Consejos para mejorar la calidad del aire en interiores</h3>
+              <p className="blog-post-content">Usa purificadores de aire, plantas que absorban contaminantes y mantén tu hogar ventilado para mejorar la calidad del aire interior.</p>
+            </div>
+          </div>
+          <div className="blog-post">
+            <img src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="La calidad del aire en la Ciudad de México" className="blog-image" />
+            <div className="blog-content">
+              <h3 className="blog-post-title">La calidad del aire en la Ciudad de México</h3>
+              <p className="blog-post-content">La CDMX tiene uno de los niveles de contaminación más altos del mundo. Conoce las medidas que se están tomando para mejorar la calidad del aire en la ciudad.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer className="social-media-footer">
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
@@ -183,8 +250,19 @@ const Home = () => {
           <FontAwesomeIcon icon={faWhatsapp} className="social-icon" />
         </a>
       </footer>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Pronostico Modal"
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <Pronostico airQualityData={airQualityData} chartData={chartData} onBack={closeModal} />
+      </Modal>
     </div>
   );
 };
 
 export default Home;
+
