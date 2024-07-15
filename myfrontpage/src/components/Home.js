@@ -198,20 +198,20 @@ const Home = () => {
               )}
             </div>
           </div>
-          
-          <div className="yearly-chart-container">
-            <h3 className="chart-title">Datos Históricos del Año</h3>
-            {renderChart(historicalYearData, 'Datos Anuales')}
-            <button onClick={downloadPDF}>Descargar PDF</button>
-            <button onClick={downloadExcel}>Descargar Excel</button>
-          </div>
-          
-          <div className="monthly-chart-container">
-            <h3 className="chart-title">Datos Históricos del Mes</h3>
-            {renderChart(historicalMonthData, 'Datos Mensuales')}
-          </div>
         </div>
       </main>
+
+      <div className="yearly-chart-container">
+        <h3 className="chart-title">Datos Históricos del Año</h3>
+        {renderChart(historicalYearData, 'Datos Anuales')}
+        <button onClick={downloadPDF}>Descargar PDF</button>
+        <button onClick={downloadExcel}>Descargar Excel</button>
+      </div>
+
+      <div className="monthly-chart-container">
+        <h3 className="chart-title">Datos Históricos del Mes</h3>
+        {renderChart(historicalMonthData, 'Datos Mensuales')}
+      </div>
 
       <section className="blog-section">
         <div className="blog-posts">
@@ -265,4 +265,3 @@ const Home = () => {
 };
 
 export default Home;
-
