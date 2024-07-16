@@ -28,6 +28,7 @@ const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [historicalYearData, setHistoricalYearData] = useState([]);
   const [historicalMonthData, setHistoricalMonthData] = useState([]);
+  const [historicalData, setHistoricalData] = useState([]);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -74,6 +75,7 @@ const Home = () => {
 
     fetchCurrentAirQuality();
   }, []);
+  
 
   const getAirQualityColor = (aqi) => {
     if (aqi <= 50) return '#00e400';
@@ -84,6 +86,32 @@ const Home = () => {
     return '#7e0023';
   };
 
+  const handleYearClick = async (year) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/historical_data/${year}/`);
+      let data = response.data;
+
+      // Verificar si data es un array
+      if (typeof data === 'string') {
+        data = JSON.parse(data);
+      }
+
+      console.log('Historical API response:', data);
+
+      // Filtrar los datos que no tienen valores NaN
+      const filteredData = data.filter(item => {
+        return !isNaN(item['Predicción_PM2.5']);
+      });
+
+      setHistoricalData(filteredData);
+    } catch (error) {
+      console.error('Error fetching historical data:', error);
+      setHistoricalData([]);
+    }
+  };
+  
+  
+  
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
       const today = startOfDay(new Date());
@@ -117,7 +145,6 @@ const Home = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos Anuales');
     XLSX.writeFile(workbook, 'historical_year_data.xlsx');
   };
-
   return (
     <div className="home-container">
       <main className="content">
@@ -128,7 +155,7 @@ const Home = () => {
           </div>
           <h2 className="air-quality-title">¿CALIDAD DEL AIRE?</h2>
           <p className="description">La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</p>
-
+  
           <div className="map-container">
             <iframe
               title="map"
@@ -140,12 +167,12 @@ const Home = () => {
               loading="lazy"
             ></iframe>
           </div>
-
+  
           <p className="faq">
             <Link to="/faq">PREGUNTAS FRECUENTES</Link>
           </p>
         </div>
-
+  
         <div className="right-side">
           <div className="info-cards-container">
             {weatherData && (
@@ -173,7 +200,7 @@ const Home = () => {
               </div>
             )}
           </div>
-
+  
           <div className="chart-info-container">
             <div className="chart-title-container">
               <h3 className="chart-title">GRAFICA DE LA CALIDAD DEL AIRE ESTA SEMANA</h3>
@@ -181,7 +208,7 @@ const Home = () => {
                 {chartData && <Grafica_Air data={chartData} />}
               </div>
             </div>
-
+  
             <div className="date-picker-container">
               <h3 className="chart-title">SELECCIONE EL DÍA QUE DESEE OBSERVAR EL PRONÓSTICO</h3>
               <Calendar
@@ -200,19 +227,36 @@ const Home = () => {
           </div>
         </div>
       </main>
-
+  
+      <div className="year-buttons-container">
+        <h3 className="chart-title">SELECCIONE EL AÑO</h3>
+        <div className="year-buttons">
+          <button onClick={() => handleYearClick(2021)}>2021</button>
+          <button onClick={() => handleYearClick(2022)}>2022</button>
+          <button onClick={() => handleYearClick(2023)}>2023</button>
+          <button onClick={() => handleYearClick(2024)}>2024</button>
+        </div>
+        {historicalData.length > 0 ? (
+          <div className="chart-container">
+            <Grafica_Air data={historicalData} />
+          </div>
+        ) : (
+          <p>No hay datos disponibles para el año seleccionado.</p>
+        )}
+      </div>
+  
       <div className="yearly-chart-container">
         <h3 className="chart-title">Datos Históricos del Año</h3>
         {renderChart(historicalYearData, 'Datos Anuales')}
         <button onClick={downloadPDF}>Descargar PDF</button>
         <button onClick={downloadExcel}>Descargar Excel</button>
       </div>
-
+  
       <div className="monthly-chart-container">
         <h3 className="chart-title">Datos Históricos del Mes</h3>
         {renderChart(historicalMonthData, 'Datos Mensuales')}
       </div>
-
+  
       <section className="blog-section">
         <div className="blog-posts">
           <div className="blog-post">
@@ -238,7 +282,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+  
       <footer className="social-media-footer">
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
@@ -250,7 +294,7 @@ const Home = () => {
           <FontAwesomeIcon icon={faWhatsapp} className="social-icon" />
         </a>
       </footer>
-
+  
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -262,6 +306,10 @@ const Home = () => {
       </Modal>
     </div>
   );
-};
-
+  
+  
+  
+  
+  
+}  
 export default Home;

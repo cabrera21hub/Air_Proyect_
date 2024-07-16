@@ -8,7 +8,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 } from 'chart.js';
 
 ChartJS.register(
@@ -18,27 +19,22 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const Grafica_Air = ({ data }) => {
-  // Verificar si data es un array o un objeto
-  const chartData = Array.isArray(data) ? data : [data];
+  if (!Array.isArray(data)) {
+    console.error('Expected data to be an array, but received:', data);
+    return <div>No data available</div>;
+  }
 
-  // Crear un array con los días de la semana
-  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const fechas = daysOfWeek;
+  // Asegúrate de que todos los elementos tengan la propiedad 'Fecha'
+  const labels = data.map(item => item.Fecha ? item.Fecha.split('T')[0] : 'Fecha no disponible');
+  const predictedPm25 = data.map(item => item['Predicción_PM2.5']);
 
-  // Si hay datos de predicción, ubicarlos en el día correcto
-  const predictedPm25 = new Array(7).fill(null);
-  chartData.forEach(item => {
-    const date = new Date(item.fecha);
-    const dayIndex = date.getDay();
-    predictedPm25[dayIndex] = item.predicted_pm25;
-  });
-
-  const lineData = {
-    labels: fechas,
+  const chartData = {
+    labels: labels,
     datasets: [
       {
         label: 'Predicted PM2.5',
@@ -66,7 +62,7 @@ const Grafica_Air = ({ data }) => {
       x: {
         title: {
           display: true,
-          text: 'Day of the Week',
+          text: 'Fecha',
         },
       },
     },
@@ -87,7 +83,7 @@ const Grafica_Air = ({ data }) => {
 
   return (
     <div>
-      <Line data={lineData} options={options} />
+      <Line data={chartData} options={options} />
     </div>
   );
 };
