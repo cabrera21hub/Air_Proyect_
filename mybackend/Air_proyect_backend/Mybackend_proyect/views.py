@@ -14,10 +14,6 @@ class CalidadAireView(APIView):
             scaler_path = os.path.join(base_dir, 'models', 'scaler.pkl')
             csv_path = os.path.join(base_dir, 'models', 'predicciones_completas.csv')
             
-            print(f"Model path: {model_path}")
-            print(f"Scaler path: {scaler_path}")
-            print(f"CSV path: {csv_path}")
-
             if not os.path.exists(model_path):
                 return JsonResponse({'error': 'Model file not found: ' + model_path})
             if not os.path.exists(scaler_path):
@@ -30,34 +26,26 @@ class CalidadAireView(APIView):
 
             data = pd.read_csv(csv_path)
             data['Fecha'] = pd.to_datetime(data['Fecha'], format="%Y-%m-%d", errors='coerce')
-            
-            print("Data loaded and converted successfully")
-            print(data.head())
-            print(data.dtypes)
 
             try:
                 date = pd.to_datetime(date, format="%Y-%m-%d")
-                print(f"Converted date: {date}")
             except ValueError as ve:
                 return JsonResponse({'error': f"Invalid date format: {date}. Error: {str(ve)}"})
 
-            df = data[data['Fecha'] == date]
-            print(f"Filtered data: {df}")
+            start_date = date
+            end_date = date + pd.DateOffset(days=6)
+
+            df = data[(data['Fecha'] >= start_date) & (data['Fecha'] <= end_date)]
 
             if not df.empty:
-                fecha = pd.Timestamp(df['Fecha'].values[0])
-                result = {
-                    'fecha': fecha.strftime("%Y-%m-%d"),
-                    'predicted_pm25': df['Predicción_PM2.5'].values[0]
-                }
+                result = df[['Fecha', 'Predicción_PM2.5']].to_dict(orient='records')
             else:
-                result = {'error': 'No data available for this date'}
+                result = {'error': 'No data available for this date range'}
         except Exception as e:
             result = {'error': str(e)}
 
-        return JsonResponse(result)
-
-
+        return JsonResponse(result, safe=False)
+    
 class HistoricalDataView(APIView):
     def get(self, request, year, format=None):
         try:

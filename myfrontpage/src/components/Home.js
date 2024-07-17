@@ -48,19 +48,20 @@ const Home = () => {
     const fetchAirQualityData = async () => {
       const formattedDate = selectedDate.toISOString().split('T')[0];
       console.log('Selected date:', formattedDate);
-
+  
       try {
         const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
         console.log('API response:', response.data);
         setAirQualityData(response.data);
-        setChartData([response.data]);
+        setChartData(response.data); // Set chart data with the entire range data
       } catch (error) {
         console.error('Error fetching air quality data:', error);
       }
     };
-
+  
     fetchAirQualityData();
   }, [selectedDate]);
+  
 
   useEffect(() => {
     const fetchCurrentAirQuality = async () => {
