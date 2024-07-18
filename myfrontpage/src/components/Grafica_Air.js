@@ -20,10 +20,10 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler // Registro del plugin Filler
 );
 
-const Grafica_Air = ({ data }) => {
+const Grafica_Air = ({ data, title }) => {
   if (!Array.isArray(data)) {
     console.error('Expected data to be an array, but received:', data);
     return <div>No data available</div>;
@@ -77,6 +77,10 @@ const Grafica_Air = ({ data }) => {
             return `Predicted PM2.5: ${context.parsed.y}`;
           },
         },
+      },
+      title: {
+        display: true,
+        text: title,
       },
     },
   };

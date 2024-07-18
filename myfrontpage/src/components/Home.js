@@ -110,8 +110,10 @@ const Home = () => {
       setHistoricalData([]);
     }
   };
-  
-  
+
+  useEffect(() => {
+    handleYearClick(2024); // Cargar datos de 2024 al inicio
+  }, []);
   
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
@@ -146,6 +148,7 @@ const Home = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos Anuales');
     XLSX.writeFile(workbook, 'historical_year_data.xlsx');
   };
+
   return (
     <div className="home-container">
       <main className="content">
@@ -156,7 +159,7 @@ const Home = () => {
           </div>
           <h2 className="air-quality-title">¿CALIDAD DEL AIRE?</h2>
           <p className="description">La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</p>
-  
+
           <div className="map-container">
             <iframe
               title="map"
@@ -168,12 +171,12 @@ const Home = () => {
               loading="lazy"
             ></iframe>
           </div>
-  
+
           <p className="faq">
             <Link to="/faq">PREGUNTAS FRECUENTES</Link>
           </p>
         </div>
-  
+
         <div className="right-side">
           <div className="info-cards-container">
             {weatherData && (
@@ -201,15 +204,15 @@ const Home = () => {
               </div>
             )}
           </div>
-  
+
           <div className="chart-info-container">
             <div className="chart-title-container">
               <h3 className="chart-title">GRAFICA DE LA CALIDAD DEL AIRE ESTA SEMANA</h3>
-              <div className="chart-container">
+              <div className="chart-container week-chart-container">
                 {chartData && <Grafica_Air data={chartData} />}
               </div>
             </div>
-  
+
             <div className="date-picker-container">
               <h3 className="chart-title">SELECCIONE EL DÍA QUE DESEE OBSERVAR EL PRONÓSTICO</h3>
               <Calendar
@@ -228,8 +231,8 @@ const Home = () => {
           </div>
         </div>
       </main>
-  
-      <div className="year-buttons-container">
+
+      <div className="yearly-chart-container">
         <h3 className="chart-title">SELECCIONE EL AÑO</h3>
         <div className="year-buttons">
           <button onClick={() => handleYearClick(2021)}>2021</button>
@@ -237,65 +240,44 @@ const Home = () => {
           <button onClick={() => handleYearClick(2023)}>2023</button>
           <button onClick={() => handleYearClick(2024)}>2024</button>
         </div>
-        {historicalData.length > 0 ? (
+        <div className="chart-and-scale">
           <div className="chart-container">
-            <Grafica_Air data={historicalData} />
+            <Grafica_Air data={historicalData} title="Datos Históricos del Año" />
           </div>
-        ) : (
-          <p>No hay datos disponibles para el año seleccionado.</p>
-        )}
-      </div>
-  
-      <div className="yearly-chart-container">
-        <h3 className="chart-title">Datos Históricos del Año</h3>
-        {renderChart(historicalYearData, 'Datos Anuales')}
-        <button onClick={downloadPDF}>Descargar PDF</button>
-        <button onClick={downloadExcel}>Descargar Excel</button>
-      </div>
-  
-      <div className="monthly-chart-container">
-        <h3 className="chart-title">Datos Históricos del Mes</h3>
-        {renderChart(historicalMonthData, 'Datos Mensuales')}
-      </div>
-  
-      <section className="blog-section">
-        <div className="blog-posts">
-          <div className="blog-post">
-            <img src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="¿Cómo afecta la calidad del aire a la salud?" className="blog-image" />
-            <div className="blog-content">
-              <h3 className="blog-post-title">¿Cómo afecta la calidad del aire a la salud?</h3>
-              <p className="blog-post-content">La mala calidad del aire puede causar enfermedades respiratorias, cardiovasculares y otros problemas de salud. Es importante conocer los niveles de contaminación y tomar medidas para protegerse.</p>
-            </div>
-          </div>
-          <div className="blog-post">
-            <img src="https://valenciaplaza.com/public/Image/2016/8/pap-10-plantas-medicinales-comestibles_NoticiaAmpliada.jpg" alt="Consejos para mejorar la calidad del aire en interiores" className="blog-image" />
-            <div className="blog-content">
-              <h3 className="blog-post-title">Consejos para mejorar la calidad del aire en interiores</h3>
-              <p className="blog-post-content">Usa purificadores de aire, plantas que absorban contaminantes y mantén tu hogar ventilado para mejorar la calidad del aire interior.</p>
-            </div>
-          </div>
-          <div className="blog-post">
-            <img src="https://www.24cdmx.com/content/images/size/w1200/2023/06/Dise-o-sin-t-tulo--93--1.png" alt="La calidad del aire en la Ciudad de México" className="blog-image" />
-            <div className="blog-content">
-              <h3 className="blog-post-title">La calidad del aire en la Ciudad de México</h3>
-              <p className="blog-post-content">La CDMX tiene uno de los niveles de contaminación más altos del mundo. Conoce las medidas que se están tomando para mejorar la calidad del aire en la ciudad.</p>
+          <div className="scale-container">
+            <div className="scale-content">
+              <div className="scale-section">
+                <h2 className="scale-title">Escala de Calidad del Aire</h2>
+                <div className="scale-item" style={{ backgroundColor: '#00e400', color: '#000' }}>
+                  <p className="level">Bueno (0-50)</p>
+                  <p className="advice">La calidad del aire es satisfactoria y no presenta ningún riesgo para la salud.</p>
+                </div>
+                <div className="scale-item" style={{ backgroundColor: '#ffff00', color: '#000' }}>
+                  <p className="level">Moderado (51-100)</p>
+                  <p className="advice">Personas sensibles pueden experimentar síntomas respiratorios.</p>
+                </div>
+                <div className="scale-item" style={{ backgroundColor: '#ff7e00', color: '#FFF' }}>
+                  <p className="level">No saludable para grupos vulnerables (101-105)</p>
+                  <p className="advice">Probabilidad de enfermedades respiratorias en personas sensibles.</p>
+                </div>
+                <div className="scale-item" style={{ backgroundColor: '#ff0000', color: '#FFF' }}>
+                  <p className="level">No saludable (151-200)</p>
+                  <p className="advice">Mayor agravamiento de enfermedades cardiacas o respiratorias.</p>
+                </div>
+                <div className="scale-item" style={{ backgroundColor: '#8f3f97', color: '#FFF' }}>
+                  <p className="level">Muy insalubre (201-300)</p>
+                  <p className="advice">Detrimento significativo de enfermedades cardiacas o respiratorias.</p>
+                </div>
+                <div className="scale-item" style={{ backgroundColor: '#7e0023', color: '#FFF' }}>
+                  <p className="level">Peligroso (301-500)</p>
+                  <p className="advice">Riesgo serio de problemas respiratorios en la población en general.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-  
-      <footer className="social-media-footer">
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faFacebook} className="social-icon" />
-        </a>
-        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faInstagram} className="social-icon" />
-        </a>
-        <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faWhatsapp} className="social-icon" />
-        </a>
-      </footer>
-  
+      </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -307,10 +289,6 @@ const Home = () => {
       </Modal>
     </div>
   );
-  
-  
-  
-  
-  
-}  
+}
+
 export default Home;
