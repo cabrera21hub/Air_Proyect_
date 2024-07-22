@@ -35,7 +35,6 @@
 
 .pronostico-info-card {
   background-color: #333; /* Fondo gris oscuro */
-  color: #fff; /* Texto blanco */
   padding: 10px; /* Reducir espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
   flex: 1; /* Flexibilidad para ocupar espacio */
@@ -43,23 +42,22 @@
   text-align: left; /* Texto alineado a la izquierda */
 }
 
-.pronostico-info-card h3 {
-  font-size: 1em; /* Reducir tamaño de fuente */
-  margin-bottom: 5px; /* Reducir margen inferior */
-}
-
 .pronostico-aqi-container {
-  background-color: #ff0; /* Fondo amarillo */
-  color: #000; /* Texto negro */
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   margin-bottom: 10px; /* Reducir margen inferior */
+  color: #000; /* Texto negro */
 }
 
 .pronostico-aqi-container p {
   margin: 0;
   font-size: 1em; /* Reducir tamaño de fuente */
+  color: #000; /* Texto negro */
+}
+
+.pronostico-consejos {
+  color: #fff; /* Texto blanco */
 }
 
 .pronostico-consejos h3 {
