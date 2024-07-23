@@ -1,14 +1,17 @@
+/* Estilos para el contenedor principal */
 .home-container {
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
+  background-color: #9fcde6; /* Fondo azul claro */
+  color: #000000; /* Texto negro */
   padding: 20px; /* Espaciado interno */
 }
 
+/* Estilos para el contenido principal */
 .content {
   display: flex; /* Uso de flexbox para organizar el contenido */
   justify-content: space-between; /* Espacio entre elementos */
 }
 
+/* Estilos para los lados izquierdo y derecho */
 .left-side, .right-side {
   margin: 10px; /* Márgenes externos */
 }
@@ -28,6 +31,7 @@
   justify-content: flex-start; /* Alineación al inicio */
 }
 
+/* Estilos para el contenedor del título */
 .title-container {
   display: flex; /* Uso de flexbox */
   align-items: center; /* Alineación centrada verticalmente */
@@ -35,57 +39,67 @@
   margin-bottom: 10px; /* Margen inferior */
 }
 
+/* Estilos para el título de la ciudad */
 .city-title {
   font-size: 1.8em; /* Tamaño de fuente grande */
-  color: #fff; /* Texto blanco */
+  color: #000000; /* Texto negro */
   font-weight: 300; /* Peso de fuente */
   margin-left: 10px; /* Margen a la izquierda */
 }
 
+/* Estilos para el icono de la ubicación */
 .location-icon {
   height: 30px; /* Altura de la imagen */
 }
 
+/* Estilos para el título de la calidad del aire */
 .air-quality-title {
   text-align: center; /* Texto centrado */
   font-size: 1.8em; /* Tamaño de fuente grande */
   margin-bottom: 15px; /* Margen inferior */
-  color: #fff; /* Texto blanco */
+  color: #000000; /* Texto negro */
 }
 
+/* Estilos para la descripción */
 .description {
   font-size: 1.1em; /* Tamaño de fuente */
   margin-bottom: 20px; /* Margen inferior */
 }
 
+/* Estilos para el contenedor del mapa */
 .map-container {
   margin-bottom: 10px; /* Margen inferior */
   height: 350px; /* Altura del mapa */
 }
 
+/* Estilos para la información de la ciudad */
 .city-info {
   font-size: 1em; /* Tamaño de fuente */
   margin-bottom: 20px; /* Margen inferior */
 }
 
+/* Estilos para el enlace de preguntas frecuentes */
 .faq {
   font-size: 1.1em; /* Tamaño de fuente */
   color: #ff0; /* Texto amarillo */
   text-align: center; /* Texto centrado */
 }
 
+/* Estilos para el contenedor de tarjetas de información */
 .info-cards-container {
   display: flex; /* Uso de flexbox */
   justify-content: space-between; /* Espacio entre elementos */
   margin-bottom: 10px; /* Reducir el margen inferior */
 }
 
+/* Estilos para el contenedor de cada tarjeta de información */
 .info-card-container {
   flex: 1; /* Flexibilidad para ocupar espacio */
   margin: 0 10px; /* Márgenes laterales */
   text-align: center; /* Texto centrado */
 }
 
+/* Estilos para cada tarjeta de información */
 .info-card {
   background-color: #ff0; /* Fondo amarillo */
   color: #000; /* Texto negro */
@@ -93,23 +107,27 @@
   border-radius: 10px; /* Bordes redondeados */
 }
 
+/* Estilos para la tarjeta de PM2.5 */
 .pm25-card {
   background-color: inherit; /* Permitir cambio de color dinámico */
 }
 
+/* Estilos para el encabezado de cada tarjeta de información */
 .info-card h3 {
   margin-bottom: 10px; /* Margen inferior */
   font-size: 1.1em; /* Tamaño de fuente */
-  border-bottom: 2px solid #fff; /* Borde inferior */
+  border-bottom: 2px solid #111111; /* Borde inferior */
   display: inline-block; /* Bloque en línea */
   padding-bottom: 5px; /* Espaciado interno inferior */
 }
 
+/* Estilos para el texto de cada tarjeta de información */
 .info-card p {
   font-size: 1.3em; /* Tamaño de fuente */
   margin: 0; /* Sin margen */
 }
 
+/* Estilos para el contenedor de información de gráficos */
 .chart-info-container {
   display: flex; /* Uso de flexbox */
   justify-content: space-between; /* Espacio entre elementos */
@@ -117,6 +135,7 @@
   margin-top: 0px; /* Reducir el margen superior */
 }
 
+/* Estilos para el contenedor del título del gráfico */
 .chart-title-container, .date-picker-container {
   flex: 1; /* Flexibilidad para ocupar espacio */
   display: flex; /* Uso de flexbox */
@@ -125,39 +144,45 @@
   margin: 0 10px; /* Márgenes laterales */
 }
 
+/* Estilos para el título del gráfico */
 .chart-title {
   text-align: center; /* Texto centrado */
   margin-bottom: 10px; /* Margen inferior */
-  color: #fff; /* Texto blanco */
+  color: #000000; /* Texto negro */
 }
 
+/* Estilos para el contenedor del gráfico */
 .chart-container {
   width: 100%; /* Ancho completo */
-  background-color: #fff; /* Fondo blanco */
+  background-color: #ffffff; /* Fondo blanco */
   padding: 15px; /* Espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
   margin-bottom: 10px; /* Margen inferior */
 }
 
+/* Estilos para el contenedor grande del gráfico */
 .chart-container-large {
   width: 95%; /* Ancho completo */
-  background-color: #fff; /* Fondo blanco */
+  background-color: #ffffff; /* Fondo blanco */
   padding: 15px; /* Espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
   margin-bottom: 10px; /* Margen inferior */
 }
 
+/* Estilos para el contenedor del gráfico y la escala */
 .chart-and-scale-container {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
+/* Estilos para el contenedor del gráfico */
 .chart-container {
   width: 65%; /* Tamaño ajustado */
   margin-right: 10px; /* Margen derecho */
 }
 
+/* Estilos para el contenedor de la escala */
 .scale-container {
   width: 35%; /* Tamaño ajustado */
   background-color: #fff; /* Fondo blanco */
@@ -166,58 +191,63 @@
   border-radius: 10px; /* Bordes redondeados */
 }
 
+/* Estilos para el título de la escala */
 .scale-title {
   text-align: center; /* Texto centrado */
   margin-bottom: 10px; /* Margen inferior */
 }
 
+/* Estilos para cada elemento de la escala */
 .scale-item {
   padding: 10px; /* Espaciado interno */
   border-radius: 5px; /* Bordes redondeados */
   margin-bottom: 10px; /* Margen inferior */
 }
 
+/* Colores personalizados para la escala */
+.scale-item.bueno {
+  background-color: #a8e6cf; /* Verde claro */
+  color: #000;
+}
+
+.scale-item.moderado {
+  background-color: #ffecb3; /* Amarillo claro */
+  color: #000;
+}
+
+.scale-item.no-saludable-grupos {
+  background-color: #ffab91; /* Naranja claro */
+  color: #000;
+}
+
+.scale-item.no-saludable {
+  background-color: #ff8a80; /* Rojo claro */
+  color: #fff;
+}
+
+.scale-item.muy-insalubre {
+  background-color: #ce93d8; /* Púrpura claro */
+  color: #fff;
+}
+
+.scale-item.peligroso {
+  background-color: #d50000; /* Rojo oscuro */
+  color: #fff;
+}
+
+/* Estilos para el texto de cada elemento de la escala */
 .scale-item p {
   margin: 0; /* Sin margen */
 }
 
+/* Estilos para el contenedor del selector de fecha */
 .date-picker-container {
-  margin-top: 0px; /* Subir el calendario */
+  margin-top: 20px; /* Reducir el margen superior */
+  width: 100%;
+  max-width: 600px; /* Ancho máximo */
 }
 
-.forecast-container {
-  background-color: #222; /* Fondo gris oscuro */
-  padding: 15px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  margin-top: 20px; /* Margen superior */
-}
-
-.quality-title {
-  color: #ff0; /* Texto amarillo */
-  margin-bottom: 10px; /* Margen inferior */
-}
-
-ul {
-  list-style-type: none; /* Sin viñetas */
-  padding: 0; /* Sin relleno */
-}
-
-ul li {
-  margin-bottom: 5px; /* Margen inferior */
-}
-
-.social-media-footer {
-  display: flex; /* Uso de flexbox */
-  justify-content: center; /* Alineación centrada */
-  margin-top: 20px; /* Margen superior */
-}
-
-.social-icon {
-  color: #fff; /* Iconos blancos */
-  font-size: 1.8em; /* Tamaño de fuente grande */
-  margin: 0 15px; /* Márgenes laterales */
-}
-
+/* Estilos para el botón del pronóstico */
 .forecast-day button {
   background-color: #ff0; /* Fondo amarillo */
   color: #000; /* Texto negro */
@@ -228,7 +258,7 @@ ul li {
   margin-top: 10px; /* Margen superior */
 }
 
-/* Modal styles */
+/* Estilos para el modal */
 .modal {
   position: fixed;
   top: 50%;
@@ -236,16 +266,17 @@ ul li {
   right: auto;
   bottom: auto;
   transform: translate(-50%, -50%);
-  background: #000;
+  background: #ffffff;
   border-radius: 10px;
   padding: 20px;
   max-width: 90%;
   max-height: 90%;
   overflow-y: auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 15px rgb(255, 255, 255);
   color: #fff;
 }
 
+/* Estilos para la superposición del modal */
 .overlay {
   position: fixed;
   top: 0;
@@ -255,7 +286,7 @@ ul li {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Additional info styles */
+/* Estilos para la información adicional */
 .additional-info {
   margin-top: 40px;
   padding: 20px;
@@ -264,20 +295,23 @@ ul li {
   border-radius: 10px; /* Bordes redondeados */
 }
 
+/* Estilos para el título de la información adicional */
 .additional-info-title {
   text-align: center;
   font-size: 1.8em;
   margin-bottom: 20px;
 }
 
+/* Estilos para el contenido de la información adicional */
 .additional-info-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
+/* Estilos para cada ítem de la información adicional */
 .additional-info-item {
-  background-color: #333; /* Fondo gris oscuro */
+  background-color: #ffffff; /* Fondo gris oscuro */
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -286,15 +320,18 @@ ul li {
   padding: 15px;
 }
 
+/* Estilos para el título de cada ítem */
 .additional-info-item h3 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
+/* Estilos para el texto de cada ítem */
 .additional-info-item p {
   font-size: 1em;
 }
 
+/* Estilos para la imagen de cada ítem */
 .additional-info-image {
   width: 100%;
   max-width: 300px; /* Ancho máximo */
@@ -302,26 +339,29 @@ ul li {
   margin-bottom: 10px;
 }
 
-/* Blog section styles */
+/* Estilos para la sección de blog */
 .blog-section {
   margin-top: 40px;
   color: #fff;
 }
 
+/* Estilos para el título del blog */
 .blog-title {
   text-align: center;
   font-size: 1.8em;
   margin-bottom: 20px;
 }
 
+/* Estilos para las publicaciones del blog */
 .blog-posts {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
+/* Estilos para cada publicación del blog */
 .blog-post {
-  background-color: #333;
+  background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -331,24 +371,29 @@ ul li {
   flex-direction: column;
 }
 
+/* Estilos para la imagen del blog */
 .blog-image {
   width: 100%;
   height: auto;
 }
 
+/* Estilos para el contenido del blog */
 .blog-content {
   padding: 15px;
 }
 
+/* Estilos para el título de cada publicación del blog */
 .blog-post-title {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
+/* Estilos para el contenido de cada publicación del blog */
 .blog-post-content {
   font-size: 1em;
 }
 
+/* Estilos para los botones */
 button {
   background-color: #ff0;
   color: #000;
@@ -358,128 +403,34 @@ button {
   cursor: pointer;
   margin-top: 10px;
 }
-/* Otros estilos de tu CSS se mantienen */
 
-.additional-info {
-  background-color: #f5f5f5; /* Fondo claro */
-  color: #333; /* Texto oscuro */
-  padding: 30px; /* Espaciado interno */
-  border-radius: 15px; /* Bordes redondeados */
-  margin-top: 40px; /* Margen superior */
-}
-
-.additional-info-title {
-  text-align: center;
-  font-size: 2em; /* Tamaño de fuente grande */
-  color: #444; /* Texto gris oscuro */
-  margin-bottom: 30px; /* Margen inferior */
-}
-
-.additional-info-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.additional-info-item {
+/* Estilos personalizados para el calendario */
+.custom-calendar {
+  width: 100%;
+  max-width: 600px; /* Ancho máximo */
   background-color: #fff; /* Fondo blanco */
   border: 1px solid #ddd; /* Borde gris claro */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
-  margin-bottom: 20px;
-  flex: 1 1 45%;
-  margin: 10px;
-  padding: 20px;
-  transition: transform 0.3s ease; /* Transición para hover */
-}
-
-.additional-info-item:hover {
-  transform: translateY(-5px); /* Mover hacia arriba en hover */
-}
-
-.additional-info-item h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #555; /* Texto gris medio */
-}
-
-.additional-info-item p {
-  font-size: 1em;
-  color: #666; /* Texto gris */
-}
-
-.additional-info-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* Otros estilos que mantienes */
-/* Otros estilos de tu CSS se mantienen */
-
-.additional-info {
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  padding: 20px; /* Espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
-  margin-top: 40px; /* Margen superior */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 20px; /* Espaciado interno */
+  margin-top: 20px; /* Margen superior */
 }
 
-.additional-info-title {
-  text-align: center;
-  font-size: 2em; /* Tamaño de fuente grande */
-  color: #fff; /* Texto blanco */
-  margin-bottom: 20px; /* Margen inferior */
+/* Estilos para los días del calendario */
+.react-calendar__tile {
+  text-align: center; /* Texto centrado */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición para hover */
 }
 
-.additional-info-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.additional-info-item {
-  background-color: #333; /* Fondo gris oscuro */
-  border: 1px solid #555; /* Borde gris */
-  border-radius: 10px;
-  margin: 10px;
-  padding: 20px;
-  
-  width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Sombra */
-  transition: transform 0.3s ease; /* Transición para hover */
+/* Estilos para los días seleccionados del calendario */
+.react-calendar__tile--active {
+  background-color: #007bff; /* Fondo azul */
   color: #fff; /* Texto blanco */
 }
 
-.additional-info-item:hover {
-  transform: translateY(-5px); /* Mover hacia arriba en hover */
-}
-
-.additional-info-item h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #ff0; /* Texto amarillo */
-}
-
-.additional-info-item p {
-  font-size: 1em;
-}
-
-.additional-info-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.slick-prev, .slick-next {
-  color: #fff; /* Flechas blancas */
-  z-index: 1;
-}
-
-/* Estilos para las flechas del carrusel */
-.slick-prev:before, .slick-next:before {
-  font-size: 30px;
-  color: #fff; /* Flechas blancas */
+/* Estilos para los días del calendario en hover */
+.react-calendar__tile:hover {
+  background-color: #f0f0f0; /* Fondo gris claro */
 }

@@ -39,11 +39,12 @@ const Grafica_Air = ({ data, title }) => {
       {
         label: 'Predicted PM2.5',
         data: predictedPm25,
-        borderColor: 'rgba(255,99,132,1)',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: 'rgba(75,192,192,0.2)',
         borderWidth: 2,
         pointRadius: 4,
         fill: true,
+        tension: 0.4, // Suaviza las líneas
       },
     ],
   };
@@ -81,12 +82,26 @@ const Grafica_Air = ({ data, title }) => {
       title: {
         display: true,
         text: title,
+        font: {
+          size: 18
+        }
       },
     },
+    elements: {
+      point: {
+        radius: 5,
+        hoverRadius: 7,
+      },
+      line: {
+        tension: 0.3,
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
   };
 
   return (
-    <div>
+    <div style={{ height: '500px' }}>
       <Line data={chartData} options={options} />
     </div>
   );

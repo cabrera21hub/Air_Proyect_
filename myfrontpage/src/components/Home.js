@@ -12,9 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Modal from 'react-modal';
 import Pronostico from './Pronostico';
-import { saveAs } from 'file-saver';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 
 Modal.setAppElement('#root'); // Establecer el elemento raíz para accesibilidad
@@ -141,12 +138,6 @@ const Home = () => {
     return <Grafica_Air data={data} title={title} />;
   };
 
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    doc.autoTable({ html: '#historicalYearTable' });
-    doc.save('historical_year_data.pdf');
-  };
-
   const downloadExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(historicalData);
     const workbook = XLSX.utils.book_new();
@@ -224,6 +215,7 @@ const Home = () => {
                 onChange={setSelectedDate}
                 value={selectedDate}
                 tileDisabled={tileDisabled}
+                className="custom-calendar"
               />
               {airQualityData ? (
                 <div className="forecast-day">
@@ -251,7 +243,6 @@ const Home = () => {
           ) : (
             <p>No hay datos disponibles para el año seleccionado.</p>
           )}
-          <button onClick={downloadPDF}>Descargar PDF</button>
           <button onClick={downloadExcel}>Descargar Excel</button>
         </div>
 
@@ -281,18 +272,6 @@ const Home = () => {
             <p className="level">Peligroso (250.5-500.4)</p>
             <p className="advice">Riesgo serio de problemas respiratorios y cardíacos.</p>
           </div>
-        </div>
-
-        {/* Nueva sección debajo de la escala de calidad del aire */}
-        <div className="additional-section">
-          <h3 className="additional-title">Impacto de la Contaminación en la Salud</h3>
-          <p className="additional-content">La exposición prolongada a altos niveles de PM2.5 puede causar diversas enfermedades respiratorias y cardiovasculares. Aquí hay algunas medidas que puedes tomar para protegerte:</p>
-          <ul className="additional-list">
-            <li>Evita actividades al aire libre en días con alta contaminación.</li>
-            <li>Utiliza purificadores de aire en interiores.</li>
-            <li>Usa mascarillas adecuadas cuando estés en exteriores.</li>
-          </ul>
-          <img src="https://www.gaceta.unam.mx/wp-content/uploads/2022/05/220526-aca1-des-f1-contaminacion.jpg" alt="Impacto en la salud" className="additional-info-image" />
         </div>
       </div>
 
