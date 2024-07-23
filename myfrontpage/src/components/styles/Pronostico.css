@@ -1,6 +1,6 @@
 .pronostico-container {
-  background-color: #fcfcfc; /* Fondo negro */
-  color: #000000; /* Texto blanco */
+  background-color: #fcfcfc; /* Fondo blanco */
+  color: #000000; /* Texto negro */
   padding: 10px;
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
@@ -12,76 +12,31 @@
 .pronostico-container h2 {
   margin-bottom: 5px; /* Reducir margen inferior */
   font-size: 1.5em;
-  color: #000000; /* Texto blanco */
+  color: #000000; /* Texto negro */
 }
 
-.pronostico-fecha {
+.pm25-info {
   margin-bottom: 10px; /* Reducir margen inferior */
-  font-size: 1em;
-}
-
-.pronostico-chart-container {
-  margin-bottom: 10px; /* Reducir margen inferior */
-  background-color: #ffffff; /* Fondo blanco para la gráfica */
-  padding: 10px; /* Reducir espaciado interno */
+  padding: 10px; /* Espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
 }
 
-.pronostico-info {
-  display: flex;
-  justify-content: space-between; /* Espacio entre tarjetas */
-  margin-bottom: 10px; /* Reducir margen inferior */
+.contingencia {
+  margin-top: 10px; /* Reducir margen superior */
 }
 
-.pronostico-info-card {
-  background-color: #ffffff; /* Fondo gris oscuro */
-  padding: 10px; /* Reducir espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  flex: 1; /* Flexibilidad para ocupar espacio */
-  margin: 0 5px; /* Reducir márgenes laterales */
-  text-align: left; /* Texto alineado a la izquierda */
+.chart-container {
+  width: 100%; /* Ancho completo */
+  margin-top: 20px; /* Margen superior */
 }
 
-.pronostico-aqi-container {
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  margin-bottom: 10px; /* Reducir margen inferior */
-  color: #000; /* Texto negro */
-}
-
-.pronostico-aqi-container p {
-  margin: 0;
-  font-size: 1em; /* Reducir tamaño de fuente */
-  color: #000; /* Texto negro */
-}
-
-.pronostico-consejos {
-  color: #000000; /* Texto blanco */
-}
-
-.pronostico-consejos h3 {
-  margin-bottom: 5px; /* Reducir margen inferior */
-  font-size: 1em; /* Reducir tamaño de fuente */
-}
-
-.pronostico-consejos ul {
-  list-style-type: none; /* Sin viñetas */
-  padding: 0; /* Sin relleno */
-}
-
-.pronostico-consejos ul li {
-  margin-bottom: 5px; /* Reducir margen inferior */
-  font-size: 0.9em; /* Reducir tamaño de fuente */
-}
-
-.pronostico-boton {
+button {
   background-color: #ff0; /* Fondo amarillo */
   color: #000; /* Texto negro */
   padding: 10px 20px; /* Espaciado interno */
   border: none; /* Sin borde */
   border-radius: 5px; /* Bordes redondeados */
   cursor: pointer; /* Cursor de mano */
-  margin-top: 10px; /* Reducir margen superior */
-  font-size: 1em; /* Reducir tamaño de fuente */
+  margin-top: 10px; /* Margen superior */
+  font-size: 1em; /* Tamaño de fuente */
 }

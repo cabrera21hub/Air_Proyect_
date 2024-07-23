@@ -4,15 +4,16 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID } from '../config';
-import { addDays, isBefore, isAfter, startOfDay, endOfDay } from 'date-fns';
-import '../components/styles/Home.css';
-import Grafica_Air from './Grafica_Air';
+import { addDays, isBefore, isAfter, startOfDay, endOfDay } from 'date-fns'; // <-- Importación corregida
+import jsPDF from 'jspdf';
 import locationIcon from '../components/imagenes/12.webp';
+import '../components/styles/Home.css'; // Verifica que esta ruta sea correcta
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Modal from 'react-modal';
 import Pronostico from './Pronostico';
 import * as XLSX from 'xlsx';
+import Grafica_Air from './Grafica_Air';
 
 Modal.setAppElement('#root'); // Establecer el elemento raíz para accesibilidad
 
@@ -90,8 +91,15 @@ const Home = () => {
     if (pm25 <= 250.4) return '#8f3f97'; // Muy insalubre
     return '#7e0023'; // Peligroso
   };
-  
-  
+
+  const getAirQualityDescription = (pm25) => {
+    if (pm25 <= 12) return 'Bueno (0-12.0): Poco o cero riesgo.';
+    if (pm25 <= 35.4) return 'Moderado (12.1-35.4): Las personas sensibles pueden experimentar síntomas respiratorios.';
+    if (pm25 <= 55.4) return 'No saludable para grupos vulnerables (35.5-55.4): Probabilidad de enfermedades respiratorias y cardíacas.';
+    if (pm25 <= 150.4) return 'No saludable (55.5-150.4): Mayor agravamiento de enfermedades cardíacas y respiratorias.';
+    if (pm25 <= 250.4) return 'Muy insalubre (150.5-250.4): Aumento significativo de enfermedades respiratorias.';
+    return 'Peligroso (250.5-500.4): Riesgo serio de problemas respiratorios y cardíacos.';
+  };
 
   const handleYearClick = async (year) => {
     try {
@@ -136,8 +144,41 @@ const Home = () => {
     setModalIsOpen(false);
   };
 
-  const renderChart = (data, title) => {
-    return <Grafica_Air data={data} title={title} />;
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.text('Reporte de Calidad del Aire', 10, 20);
+
+    if (currentPm25 !== null) {
+      doc.setFontSize(16);
+      doc.text(`Fecha: ${selectedDate.toLocaleDateString()}`, 10, 40);
+      doc.text(`Pronóstico de PM2.5: ${currentPm25.toFixed(2)} µg/m³`, 10, 60);
+
+      const description = getAirQualityDescription(currentPm25);
+      doc.text(description, 10, 80);
+
+      if (currentPm25 > 55.4) {
+        doc.setTextColor(255, 0, 0); // Rojo
+        doc.text('Contingencia Ambiental: Sí', 10, 100);
+        doc.setTextColor(0, 0, 0); // Negro
+        doc.text('Razón: Los niveles de PM2.5 están por encima del rango aceptable, lo que implica un riesgo para la salud.', 10, 120);
+      } else {
+        doc.text('Contingencia Ambiental: No', 10, 100);
+        doc.text('Razón: Los niveles de PM2.5 están dentro del rango aceptable para la mayoría de las personas.', 10, 120);
+      }
+
+      doc.text('Recomendaciones:', 10, 140);
+      doc.setFontSize(14);
+      doc.text('- Evita actividades al aire libre.', 10, 160);
+      doc.text('- Usa mascarillas adecuadas si es necesario salir.', 10, 170);
+      doc.text('- Mantén las ventanas cerradas.', 10, 180);
+    } else {
+      doc.setFontSize(16);
+      doc.text('No hay datos disponibles para el pronóstico de PM2.5.', 10, 40);
+    }
+
+    doc.save('reporte_calidad_aire.pdf');
   };
 
   const downloadExcel = () => {
@@ -222,6 +263,7 @@ const Home = () => {
               {airQualityData ? (
                 <div className="forecast-day">
                   <button onClick={openModal}>Ver Pronóstico</button>
+                  <button onClick={generatePDF}>Generar Reporte</button>
                 </div>
               ) : (
                 <p>No hay datos de pronóstico disponibles.</p>
