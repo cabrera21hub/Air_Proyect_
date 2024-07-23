@@ -1,6 +1,6 @@
 .pronostico-container {
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
+  background-color: #fcfcfc; /* Fondo negro */
+  color: #000000; /* Texto blanco */
   padding: 10px;
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
@@ -12,7 +12,7 @@
 .pronostico-container h2 {
   margin-bottom: 5px; /* Reducir margen inferior */
   font-size: 1.5em;
-  color: #fff; /* Texto blanco */
+  color: #000000; /* Texto blanco */
 }
 
 .pronostico-fecha {
@@ -22,7 +22,7 @@
 
 .pronostico-chart-container {
   margin-bottom: 10px; /* Reducir margen inferior */
-  background-color: #fff; /* Fondo blanco para la gráfica */
+  background-color: #ffffff; /* Fondo blanco para la gráfica */
   padding: 10px; /* Reducir espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
 }
@@ -34,7 +34,7 @@
 }
 
 .pronostico-info-card {
-  background-color: #333; /* Fondo gris oscuro */
+  background-color: #ffffff; /* Fondo gris oscuro */
   padding: 10px; /* Reducir espaciado interno */
   border-radius: 10px; /* Bordes redondeados */
   flex: 1; /* Flexibilidad para ocupar espacio */
@@ -57,7 +57,7 @@
 }
 
 .pronostico-consejos {
-  color: #fff; /* Texto blanco */
+  color: #000000; /* Texto blanco */
 }
 
 .pronostico-consejos h3 {

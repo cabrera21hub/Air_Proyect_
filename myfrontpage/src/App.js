@@ -39,7 +39,6 @@ const Header = () => {
         <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">INICIO</Link>
         <Link className={`nav-link ${location.pathname === '/about-us' ? 'active' : ''}`} to="/about-us">ACERCA DE NOSOTROS</Link>
       </nav>
-      <button className="login-button">INICIAR SESIÓN</button>
     </header>
   );
 };

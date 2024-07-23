@@ -90,6 +90,8 @@ const Home = () => {
     if (pm25 <= 250.4) return '#8f3f97'; // Muy insalubre
     return '#7e0023'; // Peligroso
   };
+  
+  
 
   const handleYearClick = async (year) => {
     try {
