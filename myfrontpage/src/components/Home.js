@@ -4,10 +4,10 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import { WEATHER_API_URL, WEATHER_API_KEY, CITY_ID } from '../config';
-import { addDays, isBefore, isAfter, startOfDay, endOfDay } from 'date-fns'; // <-- Importación corregida
+import { addDays, isBefore, isAfter, startOfDay, endOfDay } from 'date-fns';
 import jsPDF from 'jspdf';
 import locationIcon from '../components/imagenes/12.webp';
-import '../components/styles/Home.css'; // Verifica que esta ruta sea correcta
+import '../components/styles/Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Modal from 'react-modal';
@@ -15,7 +15,7 @@ import Pronostico from './Pronostico';
 import * as XLSX from 'xlsx';
 import Grafica_Air from './Grafica_Air';
 
-Modal.setAppElement('#root'); // Establecer el elemento raíz para accesibilidad
+Modal.setAppElement('#root');
 
 const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -42,7 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAirQualityData = async () => {
-      const today = new Date().toISOString().split('T')[0]; // Obtén la fecha actual en el formato adecuado
+      const today = new Date().toISOString().split('T')[0];
       try {
         const response = await axios.get(`http://localhost:8000/api/calidad_aire/${today}/`);
         const data = response.data;
@@ -70,7 +70,7 @@ const Home = () => {
         const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
         console.log('API response:', response.data);
         setAirQualityData(response.data);
-        setChartData(response.data); // Set chart data with the entire range data
+        setChartData(response.data);
       } catch (error) {
         console.error('Error fetching air quality data:', error);
       }
@@ -106,14 +106,12 @@ const Home = () => {
       const response = await axios.get(`http://localhost:8000/api/historical_data/${year}/`);
       let data = response.data;
 
-      // Verificar si data es un array
       if (typeof data === 'string') {
         data = JSON.parse(data);
       }
 
       console.log('Historical API response:', data);
 
-      // Filtrar los datos que no tienen valores NaN y solo hasta la fecha actual
       const today = new Date();
       const filteredData = data.filter(item => {
         const itemDate = new Date(item.Fecha);
@@ -147,35 +145,42 @@ const Home = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    doc.setFontSize(20);
-    doc.text('Reporte de Calidad del Aire', 10, 20);
+    doc.setFontSize(22);
+    doc.text('Reporte de Calidad del Aire', 105, 20, null, null, 'center');
+
+    doc.setFontSize(16);
+    doc.text(`Fecha: ${selectedDate.toLocaleDateString()}`, 105, 40, null, null, 'center');
 
     if (currentPm25 !== null) {
-      doc.setFontSize(16);
-      doc.text(`Fecha: ${selectedDate.toLocaleDateString()}`, 10, 40);
-      doc.text(`Pronóstico de PM2.5: ${currentPm25.toFixed(2)} µg/m³`, 10, 60);
+      doc.setFontSize(14);
+      doc.text(`Pronóstico de PM2.5: ${currentPm25.toFixed(2)} µg/m³`, 105, 50, null, null, 'center');
 
       const description = getAirQualityDescription(currentPm25);
-      doc.text(description, 10, 80);
+      doc.text(description, 10, 70, { maxWidth: 190 });
 
       if (currentPm25 > 55.4) {
-        doc.setTextColor(255, 0, 0); // Rojo
-        doc.text('Contingencia Ambiental: Sí', 10, 100);
-        doc.setTextColor(0, 0, 0); // Negro
-        doc.text('Razón: Los niveles de PM2.5 están por encima del rango aceptable, lo que implica un riesgo para la salud.', 10, 120);
+        doc.setTextColor(255, 0, 0);
+        doc.text('Contingencia Ambiental: Sí', 10, 90);
+        doc.setTextColor(0, 0, 0);
+        doc.text('Razón: Los niveles de PM2.5 están por encima del rango aceptable, lo que implica un riesgo para la salud.', 10, 100, { maxWidth: 190 });
       } else {
-        doc.text('Contingencia Ambiental: No', 10, 100);
-        doc.text('Razón: Los niveles de PM2.5 están dentro del rango aceptable para la mayoría de las personas.', 10, 120);
+        doc.text('Contingencia Ambiental: No', 10, 90);
+        doc.text('Razón: Los niveles de PM2.5 están dentro del rango aceptable para la mayoría de las personas.', 10, 100, { maxWidth: 190 });
       }
 
-      doc.text('Recomendaciones:', 10, 140);
-      doc.setFontSize(14);
-      doc.text('- Evita actividades al aire libre.', 10, 160);
-      doc.text('- Usa mascarillas adecuadas si es necesario salir.', 10, 170);
-      doc.text('- Mantén las ventanas cerradas.', 10, 180);
+      doc.text('Recomendaciones:', 10, 120);
+      doc.setFontSize(12);
+      const recommendations = [
+        '- Evita actividades al aire libre.',
+        '- Usa mascarillas adecuadas si es necesario salir.',
+        '- Mantén las ventanas cerradas.'
+      ];
+      recommendations.forEach((rec, i) => {
+        doc.text(rec, 10, 130 + i * 10);
+      });
     } else {
-      doc.setFontSize(16);
-      doc.text('No hay datos disponibles para el pronóstico de PM2.5.', 10, 40);
+      doc.setFontSize(14);
+      doc.text('No hay datos disponibles para el pronóstico de PM2.5.', 105, 60, null, null, 'center');
     }
 
     doc.save('reporte_calidad_aire.pdf');
