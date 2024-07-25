@@ -1,47 +1,50 @@
 import React from 'react';
-import Grafica_Air from './Grafica_Air';
 import '../components/styles/Pronostico.css';
+import Grafica_Air from './Grafica_Air';
 
 const Pronostico = ({ airQualityData, chartData, onBack }) => {
-  const getAirQualityInfo = (aqi) => {
-    if (aqi <= 50) return { level: 'Bueno', advice: 'La calidad del aire es satisfactoria y no presenta ningún riesgo para la salud.' };
-    if (aqi <= 100) return { level: 'Moderado', advice: 'La calidad del aire es aceptable; sin embargo, para algunos contaminantes puede haber un problema de salud moderado para un número muy reducido de personas que son especialmente sensibles a la contaminación del aire.' };
-    if (aqi <= 150) return { level: 'Dañino para grupos sensibles', advice: 'Miembros de grupos sensibles pueden experimentar efectos en su salud. El público en general no es probable que se vea afectado.' };
-    if (aqi <= 200) return { level: 'Dañino', advice: 'Todos pueden comenzar a experimentar efectos en la salud; miembros de grupos sensibles pueden experimentar efectos más graves.' };
-    if (aqi <= 300) return { level: 'Muy dañino', advice: 'Advertencias de salud de situaciones de emergencia. Toda la población es más probable que se vea afectada.' };
-    return { level: 'Peligroso', advice: 'Alerta sanitaria: todos pueden experimentar efectos graves en la salud.' };
+  const getAirQualityColor = (pm25) => {
+    if (pm25 <= 12) return '#00e400'; // Bueno
+    if (pm25 <= 35.4) return '#ffff00'; // Moderado
+    if (pm25 <= 55.4) return '#ff7e00'; // No saludable para grupos sensibles
+    if (pm25 <= 150.4) return '#ff0000'; // No saludable
+    if (pm25 <= 250.4) return '#8f3f97'; // Muy insalubre
+    return '#7e0023'; // Peligroso
   };
 
-  const airQualityInfo = getAirQualityInfo(airQualityData.aqi);
+  const getAirQualityDescription = (pm25) => {
+    if (pm25 <= 12) return 'Bueno (0-12.0): Poco o cero riesgo.';
+    if (pm25 <= 35.4) return 'Moderado (12.1-35.4): Las personas sensibles pueden experimentar síntomas respiratorios.';
+    if (pm25 <= 55.4) return 'No saludable para grupos vulnerables (35.5-55.4): Probabilidad de enfermedades respiratorias y cardíacas.';
+    if (pm25 <= 150.4) return 'No saludable (55.5-150.4): Mayor agravamiento de enfermedades cardíacas y respiratorias.';
+    if (pm25 <= 250.4) return 'Muy insalubre (150.5-250.4): Aumento significativo de enfermedades respiratorias.';
+    return 'Peligroso (250.5-500.4): Riesgo serio de problemas respiratorios y cardíacos.';
+  };
+
+  const currentPm25 = airQualityData[0]['Predicción_PM2.5'];
 
   return (
     <div className="pronostico-container">
-      <h2>PRONOSTICO DEL DIA</h2>
-      <div className="pronostico-fecha">{airQualityData.fecha}</div>
-
-      <div className="pronostico-chart-container">
+      <h2>Pronóstico del Día</h2>
+      <div className="pm25-info" style={{ backgroundColor: getAirQualityColor(currentPm25) }}>
+        <h3>PM2.5: {currentPm25.toFixed(2)} µg/m³</h3>
+        <p>{getAirQualityDescription(currentPm25)}</p>
+        {currentPm25 > 55.4 ? (
+          <div className="contingencia">
+            <h3 style={{ color: '#ff0000' }}>Contingencia Ambiental: Sí</h3>
+            <p>Razón: Los niveles de PM2.5 están por encima del rango aceptable, lo que implica un riesgo para la salud.</p>
+          </div>
+        ) : (
+          <div className="contingencia">
+            <h3>Contingencia Ambiental: No</h3>
+            <p>Razón: Los niveles de PM2.5 están dentro del rango aceptable para la mayoría de las personas.</p>
+          </div>
+        )}
+      </div>
+      <div className="chart-container">
         <Grafica_Air data={chartData} />
       </div>
-
-      <div className="pronostico-info">
-        <div className="pronostico-info-card">
-          <div className="pronostico-aqi-container">
-            <p>{airQualityData.aqi} AQI</p>
-            <p>{airQualityInfo.level}</p>
-          </div>
-          <div className="pronostico-consejos">
-            <h3>Consejos:</h3>
-            <ul>
-              <li>{airQualityInfo.advice}</li>
-              <li>Evite salir si no es necesario.</li>
-              <li>Use mascarilla al aire libre.</li>
-              <li>Evite realizar ejercicios al aire libre.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <button className="pronostico-boton" onClick={onBack}>Regresar</button>
+      <button onClick={onBack}>Cerrar</button>
     </div>
   );
 };

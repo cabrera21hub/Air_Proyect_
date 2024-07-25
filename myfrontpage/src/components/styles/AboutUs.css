@@ -1,57 +1,67 @@
 .about-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 50px);
-    padding: 20px;
-    background: #fff;
-    color: #333;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  .about-title {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #002366;
-  }
-  
-  .about-image {
-    width: 100%;
-    max-width: 300px;
-    margin: 20px 0;
-    border-radius: 10px;
-  }
-  
-  .about-text {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    text-align: justify;
-    color: #002366;
-  }
-  
-  .about-contact {
-    margin-top: 20px;
-  }
-  
-  .about-subtitle {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-    color: #002366;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .social-icon {
-    width: 40px;
-    height: 40px;
-  }
-  
+  background-color: #f0f0f0; /* Fondo gris claro */
+  color: #333; /* Texto gris oscuro */
+  padding: 40px 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  max-width: 900px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar el contenedor */
+  text-align: center; /* Centrar texto */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.about-header {
+  display: flex; /* Uso de flexbox */
+  flex-direction: column; /* Dirección columna */
+  align-items: center; /* Alineación centrada */
+}
+
+.about-title {
+  font-size: 2.5em; /* Tamaño de fuente grande */
+  color: #0073e6; /* Texto azul */
+  margin-bottom: 20px; /* Margen inferior */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 2px; /* Espaciado entre letras */
+}
+
+.about-image {
+  max-width: 150px; /* Ancho máximo */
+  height: auto; /* Altura automática */
+  margin-bottom: 20px; /* Margen inferior */
+  border-radius: 50%; /* Imagen circular */
+  border: 2px solid #0073e6; /* Borde */
+}
+
+.about-text {
+  font-size: 1.2em; /* Tamaño de fuente */
+  margin-bottom: 20px; /* Margen inferior */
+  line-height: 1.6; /* Altura de línea */
+  color: #555; /* Texto gris */
+}
+
+.about-contact {
+  margin-top: 30px; /* Margen superior */
+}
+
+.about-subtitle {
+  font-size: 1.8em; /* Tamaño de fuente */
+  color: #0073e6; /* Texto azul */
+  margin-bottom: 20px; /* Margen inferior */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.social-icons {
+  display: flex; /* Uso de flexbox */
+  justify-content: center; /* Centrar iconos */
+  gap: 30px; /* Espacio entre iconos */
+}
+
+.social-icon {
+  color: #0073e6; /* Iconos azules */
+  font-size: 2em; /* Tamaño de fuente grande */
+  transition: color 0.3s; /* Transición suave */
+}
+
+.social-icon:hover {
+  color: #005bb5; /* Color al pasar el cursor */
+}
