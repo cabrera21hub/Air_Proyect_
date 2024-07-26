@@ -103,7 +103,7 @@ const Home = () => {
 
   const handleYearClick = async (year) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/historical_data/${year}/`);
+      const response = await axios.get(`https://air-proyect-olmf.onrender.com/api/historical_data/${year}/`);
       let data = response.data;
 
       if (typeof data === 'string') {
