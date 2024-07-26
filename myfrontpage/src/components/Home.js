@@ -44,7 +44,7 @@ const Home = () => {
     const fetchAirQualityData = async () => {
       const today = new Date().toISOString().split('T')[0];
       try {
-        const response = await axios.get(`http://localhost:8000/api/calidad_aire/${today}/`);
+        const response = await axios.get(`https://air-proyect-olmf.onrender.com/api/calidad_aire/${today}/`);
         const data = response.data;
         console.log('PM2.5 API response:', data);
         if (data.length > 0 && typeof data[0]['Predicción_PM2.5'] === 'number') {
@@ -67,7 +67,7 @@ const Home = () => {
       console.log('Selected date:', formattedDate);
 
       try {
-        const response = await axios.get(`http://localhost:8000/api/calidad_aire/${formattedDate}/`);
+        const response = await axios.get(`https://air-proyect-olmf.onrender.com/api/calidad_aire/${formattedDate}/`);
         console.log('API response:', response.data);
         setAirQualityData(response.data);
         setChartData(response.data);
