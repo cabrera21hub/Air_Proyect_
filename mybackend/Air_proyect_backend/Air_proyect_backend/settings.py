@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3^2#o0f42vz_&3aaafz4tyt(vm=go=%srl(_pcyxpd-znaduq!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.73', 'localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['192.168.1.73', 'localhost', 'https://air-proyect-1.onrender.com/', '0.0.0.0']
 
 # Application definition
 
@@ -130,5 +130,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://air-proyect-1.onrender.com/",
 ]
-SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
