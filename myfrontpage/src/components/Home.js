@@ -323,7 +323,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      
       <section className="additional-info">
         <h2 className="additional-info-title">Información Adicional Sobre la Calidad del Aire</h2>
         <div className="additional-info-content">
