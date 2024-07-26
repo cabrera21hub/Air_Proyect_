@@ -42,7 +42,7 @@
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "start": "npx serve -s build",
+    "start": "node node_modules/serve/bin/serve.js -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
