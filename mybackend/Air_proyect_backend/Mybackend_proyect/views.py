@@ -67,4 +67,5 @@ class HistoricalDataView(APIView):
         except Exception as e:
             return JsonResponse({'error': str(e)})
         
-        
+def home(request):
+    return HttpResponse("Welcome to the Air Project API!")
