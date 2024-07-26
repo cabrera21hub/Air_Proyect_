@@ -66,3 +66,5 @@ class HistoricalDataView(APIView):
             return JsonResponse(data_json, safe=False)
         except Exception as e:
             return JsonResponse({'error': str(e)})
+        
+        

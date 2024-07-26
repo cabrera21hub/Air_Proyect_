@@ -16,11 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Mybackend_proyect.views import CalidadAireView, HistoricalDataView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/calidad_aire/<str:date>/', CalidadAireView.as_view(), name='calidad_aire'),
-    path('api/historical_data/<int:year>/', HistoricalDataView.as_view(), name='historical_data'),
     path('api/', include('Mybackend_proyect.urls')),
 ]
+
