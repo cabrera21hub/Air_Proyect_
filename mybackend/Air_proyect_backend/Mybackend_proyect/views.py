@@ -5,6 +5,7 @@ import joblib
 from django.http import JsonResponse
 from rest_framework.views import APIView
 import pandas as pd
+from django.http import HttpResponse
 
 class CalidadAireView(APIView):
     def get(self, request, date, format=None):
