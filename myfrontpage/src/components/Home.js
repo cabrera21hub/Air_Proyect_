@@ -199,7 +199,7 @@ const Home = () => {
         <div className="left-side">
           <div className="title-container">
             <img src={locationIcon} alt="Location" className="location-icon" />
-            <h1 className="city-title">CIUDAD DE MEXICO</h1>
+            <h1 className="city-title">CIUDADe DE MEXICO</h1>
           </div>
           <h2 className="air-quality-title">¿CALIDAD DEL AIRE?</h2>
           <p className="description">La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</p>
