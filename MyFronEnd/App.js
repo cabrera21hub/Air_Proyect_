@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from './screens/HomeScreen';
+// Importa el componente Home
+import Home from './screens/Home'; // Asegúrate de que la ruta sea correcta
 import WeatherScreen from './screens/WeatherScreen';
 import CombinedScreen from './screens/CombinedScreen';
 import ChartScreen from './screens/ChartScreen';
@@ -20,7 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Home" component={Home} />
     <Stack.Screen name="Weather" component={WeatherScreen} />
     <Stack.Screen name="Combined" component={CombinedScreen} />
     <Stack.Screen name="Charts" component={ChartScreen} />
