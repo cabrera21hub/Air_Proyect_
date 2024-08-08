@@ -88,7 +88,7 @@ const Home = () => {
   };
 
   const openModal = () => {
-    setModalIsOpen(true);
+    setModalIsOpen(true);//este es el nuevo
   };
 
   const closeModal = () => {
@@ -100,7 +100,7 @@ const Home = () => {
       <View style={{ marginBottom: 20 }}>
         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>CIUDAD DE MEXICO</Text>
         <Text style={{ fontSize: 18, marginVertical: 10 }}>¿CALIDAD DEL AIRE?</Text>
-        <Text>La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</Text>
+        <Text> La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</Text>
       </View>
 
       {weatherData && (
