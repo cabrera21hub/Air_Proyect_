@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 30;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
   background-color: #9fcde6; /* Fondo azul */
@@ -9,7 +9,7 @@ body {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
   align-items: center;
   padding: 10px 40px;
   background: linear-gradient(90deg, #053955, #0b74a9); /* Gradiente de fondo */
@@ -21,6 +21,17 @@ body {
   z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
   border-radius: 0 0 15px 15px; /* Bordes redondeados */
 }
+
+.nav {
+  display: flex; /* Asegúrate de usar display: flex */
+  flex-wrap: wrap; /* Permite que los ítems se envuelvan en varias líneas si es necesario */
+  justify-content: center; /* Centra los ítems horizontalmente */
+  gap: 15px; /* Espacio entre los enlaces, ajusta según sea necesario */
+  padding: 10px; /* Espaciado interno, ajusta según sea necesario */
+  margin-left: auto; /* Empuja los elementos hacia la derecha */
+  margin-right: 60px; /* Centra los elementos horizontalmente */
+}
+
 
 .logo-container {
   display: flex;
@@ -43,9 +54,6 @@ body {
   font-weight: bold;
 }
 
-.nav {
-  display: flex;
-}
 
 .nav-link {
   color: #fff; /* Texto blanco */
