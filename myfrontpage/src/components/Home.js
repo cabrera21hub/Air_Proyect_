@@ -14,7 +14,7 @@ import Modal from 'react-modal';
 import Pronostico from './Pronostico';
 import * as XLSX from 'xlsx';
 import Grafica_Air from './Grafica_Air';
-
+import'../components/styles/Prueba.css';
 Modal.setAppElement('#root');
 
 const Home = () => {
@@ -196,10 +196,13 @@ const Home = () => {
   return (
     <div className="home-container">
       <main className="content">
+        
+      <div className='Prueba'>
         <div className="left-side">
           <div className="title-container">
             <img src={locationIcon} alt="Location" className="location-icon" />
-            <h1 className="city-title">CIUDADe DE MEXICO</h1>
+
+            <h1 className="city-title">CIUDAD DE MEXICO</h1>
           </div>
           <h2 className="air-quality-title">¿CALIDAD DEL AIRE?</h2>
           <p className="description">La calidad del aire mide qué tan limpio o contaminado está el aire que respiramos. Factores como el humo de los vehículos, las fábricas y el polvo pueden afectar nuestra salud.</p>
@@ -210,17 +213,16 @@ const Home = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.789292316303!2d-99.14063268562243!3d19.432606986891597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92b7f29b9e5%3A0x46edb3d410a64a5d!2sZ%C3%B3calo%2C%20Plaza%20de%20la%20Constituci%C3%B3n%2C%20Centro%2C%20Cuauht%C3%A9moc%2C%2006000%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX%2C%20M%C3%A9xico!5e0!3m2!1ses!2sus!4v1629129129457!5m2!1ses!2sus"
               width="100%"
               height="300"
+              
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
             ></iframe>
           </div>
-
-          <p className="faq">
-            <Link to="/faq">PREGUNTAS FRECUENTES</Link>
-          </p>
         </div>
-
+        </div>
+        
+      <div className='Prueba2'>
         <div className="right-side">
           <div className="info-cards-container">
             {weatherData && (
@@ -276,11 +278,13 @@ const Home = () => {
             </div>
           </div>
         </div>
+        </div>
       </main>
-
+      
+    <div className='Prueba3'>
       <div className="chart-and-scale-container">
         <div className="chart-container">
-          <h3 className="chart-title" style={{ color: '#000' }}>Datos Históricos del Año 2024</h3>
+          <h3 className="chart-title" style={{ color: '#000' }}>Datos Históricos a Través de los Años</h3>
           <div className="year-buttons">
             <button onClick={() => handleYearClick(2021)}>2021</button>
             <button onClick={() => handleYearClick(2022)}>2022</button>
@@ -292,7 +296,7 @@ const Home = () => {
           ) : (
             <p>No hay datos disponibles para el año seleccionado.</p>
           )}
-          <button onClick={downloadExcel}>Descargar Excel</button>
+          <button className='download-excel-button'  onClick={downloadExcel}>Descargar Excel Datos Historicos</button>
         </div>
 
         <div className="scale-container">
@@ -323,43 +327,51 @@ const Home = () => {
           </div>
         </div>
       </div>
+    </div>
       
       <section className="additional-info">
         <h2 className="additional-info-title">Información Adicional Sobre la Calidad del Aire</h2>
         <div className="additional-info-content">
-          <div className="additional-info-item">
-            <h3>¿Qué es PM2.5?</h3>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/PM_and_a_human_hair.jpg" alt="PM2.5" className="additional-info-image" />
-            <p>El PM2.5 se refiere a partículas microscópicas en el aire con un diámetro de 2.5 micrómetros o menos. Estas partículas son lo suficientemente pequeñas como para penetrar profundamente en los pulmones y entrar en el torrente sanguíneo, lo que puede causar problemas de salud graves.</p>
-          </div>
+        <div className="additional-info-item">
+        <h3>¿Qué es PM2.5?</h3> 
+        <img
+    src="https://upload.wikimedia.org/wikipedia/commons/6/63/PM_and_a_human_hair.jpg"
+    alt="PM2.5"
+    style={{ width: '400px', height: 'auto' }} // Ajusta el tamaño aquí
+    className="additional-info-image"
+  />
+      <div>
+        <p>El PM2.5 se refiere a partículas microscópicas en el aire con un diámetro de 2.5 micrómetros o menos. Estas partículas son lo suficientemente pequeñas como para penetrar profundamente en los pulmones y entrar en el torrente sanguíneo, lo que puede causar problemas de salud graves.</p>
+      </div>
+    </div>
           <div className="additional-info-item">
             <h3>¿Cómo afecta la calidad del aire a la salud?</h3>
-            <img src="https://integralatampost.s3.amazonaws.com/uploads/article/picture/32737/2022-09-06_09_512022-09-06_09_4620220907_Como-afecta-a-tu-salud-la-calidad-del-aire-que-respiras.jpg" alt="Salud y aire" className="additional-info-image" />
+            <img src="https://integralatampost.s3.amazonaws.com/uploads/article/picture/32737/2022-09-06_09_512022-09-06_09_4620220907_Como-afecta-a-tu-salud-la-calidad-del-aire-que-respiras.jpg" alt="Salud y aire" style={{ width: '650px', height: 'auto' }} className="additional-info-image" />
             <p>La mala calidad del aire puede causar enfermedades respiratorias, cardiovasculares y otros problemas de salud. Es importante conocer los niveles de contaminación y tomar medidas para protegerse.</p>
           </div>
           <div className="additional-info-item">
             <h3>Consejos para mejorar la calidad del aire en interiores</h3>
-            <img src="https://fotografias.antena3.com/clipping/cmsimages02/2023/02/21/DDDF1FAB-E7BD-4EFF-AA2D-8B01B7884BE6/trucos-mejorar-calidad-aire-casa-evitar-problemas-salud_98.jpg?crop=1000,563,x0,y126&width=1900&height=1069&optimize=high&format=webply" alt="Aire interior" className="additional-info-image" />
+            <img src="https://fotografias.antena3.com/clipping/cmsimages02/2023/02/21/DDDF1FAB-E7BD-4EFF-AA2D-8B01B7884BE6/trucos-mejorar-calidad-aire-casa-evitar-problemas-salud_98.jpg?crop=1000,563,x0,y126&width=1900&height=1069&optimize=high&format=webply"  style={{ width: '650px', height: 'auto' }} alt="Salud y aire" className="additional-info-image" />
             <p>Usa purificadores de aire, plantas que absorban contaminantes y mantén tu hogar ventilado para mejorar la calidad del aire interior.</p>
           </div>
           <div className="additional-info-item">
             <h3>La calidad del aire en la Ciudad de México</h3>
-            <img src="https://www.portalambiental.com.mx/sites/default/files/media/image/2019/05/contaminacion_del_aire_cdmx_1605_-3.jpg" alt="CDMX aire" className="additional-info-image" />
+            <img src="https://www.portalambiental.com.mx/sites/default/files/media/image/2019/05/contaminacion_del_aire_cdmx_1605_-3.jpg" alt="CDMX aire" className="additional-info-image"  style={{ width: '550px', height: 'auto' }}/>
             <p>La CDMX tiene uno de los niveles de contaminación más altos del mundo. Conoce las medidas que se están tomando para mejorar la calidad del aire en la ciudad.</p>
           </div>
           <div className="additional-info-item">
             <h3>Impacto de la contaminación del aire en niños y ancianos</h3>
-            <img src="https://www.uninorte.edu.co/documents/13400067/25028114/enfermedad-respiratoria.jpeg/711e0d77-08bc-750f-62f4-fc1799e15dd6?t=1652764762366" alt="Impacto en niños y ancianos" className="additional-info-image" />
+            <img src="https://www.uninorte.edu.co/documents/13400067/25028114/enfermedad-respiratoria.jpeg/711e0d77-08bc-750f-62f4-fc1799e15dd6?t=1652764762366" alt="Impacto en niños y ancianos" className="additional-info-image" style={{ width: '550px', height: 'auto' }} />
             <p>Los niños y los ancianos son más susceptibles a los efectos de la contaminación del aire. Es fundamental monitorear la calidad del aire y tomar precauciones adicionales para proteger a estos grupos vulnerables.</p>
           </div>
           <div className="additional-info-item">
             <h3>Medidas para reducir la exposición al PM2.5</h3>
-            <img src="https://www.pranaair.com/wp-content/uploads/2021/08/sources-of-pm2.5.png" alt="Reducir exposición" className="additional-info-image" />
+            <img src="https://www.pranaair.com/wp-content/uploads/2021/08/sources-of-pm2.5.png" tyle={{ width: '650px', height: 'auto' }} alt="Reducir exposición" className="additional-info-image" style={{ width: '350px', height: 'auto' }} />
             <p>Evita actividades al aire libre en días con altos niveles de PM2.5, usa mascarillas adecuadas y purificadores de aire en interiores para reducir la exposición.</p>
           </div>
         </div>
       </section>
-
+    
       <footer className="social-media-footer">
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
@@ -371,6 +383,7 @@ const Home = () => {
           <FontAwesomeIcon icon={faWhatsapp} className="social-icon" />
         </a>
       </footer>
+      
 
       <Modal
         isOpen={modalIsOpen}

@@ -24,6 +24,7 @@ const Pronostico = ({ airQualityData, chartData, onBack }) => {
   const currentPm25 = airQualityData[0]['Predicción_PM2.5'];
 
   return (
+    <div className="prediccion-wrapper">
     <div className="pronostico-container">
       <h2>Pronóstico del Día</h2>
       <div className="pm25-info" style={{ backgroundColor: getAirQualityColor(currentPm25) }}>
@@ -45,6 +46,7 @@ const Pronostico = ({ airQualityData, chartData, onBack }) => {
         <Grafica_Air data={chartData} />
       </div>
       <button onClick={onBack}>Cerrar</button>
+    </div>
     </div>
   );
 };
