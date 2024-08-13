@@ -14,7 +14,6 @@ import Modal from 'react-modal';
 import Pronostico from './Pronostico';
 import * as XLSX from 'xlsx';
 import Grafica_Air from './Grafica_Air';
-import'../components/styles/Prueba.css';
 Modal.setAppElement('#root');
 
 const Home = () => {
