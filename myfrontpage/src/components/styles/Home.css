@@ -1,10 +1,11 @@
 /* Estilos para el contenedor principal */
 .home-container {
-  background-color: #9fcde6; /* Fondo azul claro */
-  color: #000000; /* Texto negro */
-  padding: 20px; /* Espaciado interno */
+  background-color: #9fcde6;
+  color: #000000;
+  padding: 10px;
+  max-width: 3000px; /* Ajusta el ancho máximo según sea necesario */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
 }
-
 /* Estilos para el contenido principal */
 .content {
   display: flex; /* Uso de flexbox para organizar el contenido */
@@ -15,6 +16,7 @@
 .left-side, .right-side {
   margin: 10px; /* Márgenes externos */
 }
+
 
 .left-side {
   flex: 2; /* Flexibilidad para ocupar 2 partes */
@@ -68,8 +70,14 @@
 
 /* Estilos para el contenedor del mapa */
 .map-container {
-  margin-bottom: 10px; /* Margen inferior */
-  height: 350px; /* Altura del mapa */
+  width: 100%; /* Hace que el contenedor ocupe el ancho completo del elemento padre */
+  max-width: 800px; /* Limita el ancho máximo para evitar que se expanda demasiado en pantallas grandes */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.map-iframe {
+  width: 100%; /* Hace que el iframe ocupe el ancho del contenedor */
+  height: 500px; /* Establece una altura fija */
 }
 
 /* Estilos para la información de la ciudad */
@@ -171,21 +179,22 @@
 
 /* Estilos para el contenedor del gráfico y la escala */
 .chart-and-scale-container {
-  display: flex;
+  display: contents;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 220px;
 }
 
 /* Estilos para el contenedor del gráfico */
 .chart-container {
   background-color: #ffffff;
-  width: 65%; /* Tamaño ajustado */
-  margin-right: 10px; /* Margen derecho */
+  width: auto; /* Tamaño ajustado */
+  margin-right: auto; /* Margen derecho */
+  margin-left: auto;
 }
 
 /* Estilos para el contenedor de la escala */
 .scale-container {
-  width: 35%; /* Tamaño ajustado */
+  width: 40%; /* Tamaño ajustado */
   background-color: #ffffff; /* Fondo blanco */
   color: #000000; /* Texto negro */
   padding: 15px; /* Espaciado interno */
@@ -249,17 +258,29 @@
   width: 100%;
   max-width: 600px; /* Ancho máximo */
 }
-
-/* Estilos para el botón del pronóstico */
-.forecast-day button {
-  background-color: #ff0; /* Fondo amarillo */
-  color: #000; /* Texto negro */
-  padding: 10px 20px; /* Espaciado interno */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de mano */
-  margin-top: 10px; /* Margen superior */
+.forecast-day {
+  display: flex; /* Usamos flexbox para alinear los botones en fila */
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 15px; /* Espacio entre los botones */
+  margin-top: 40px; /* Espacio superior si lo necesitas */
 }
+
+.forecast-button {
+  background-color: #ffeb3b; /* Amarillo */
+  color: #000; /* Texto en negro para contraste */
+  border: 2px solid #ffeb3b; /* Borde del botón en amarillo */
+  border-radius: 5px; /* Esquinas redondeadas */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  cursor: pointer; /* Cambia el cursor a mano al pasar sobre el botón */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para hover */
+}
+
+.forecast-button:hover {
+  background-color: #fbc02d; /* Amarillo más oscuro en hover */
+  color: #fff; /* Texto blanco en hover */
+}
+
+
 
 /* Estilos para el modal */
 .modal {
@@ -345,14 +366,16 @@
   color: #555555; /* Color del texto */
 }
 
-/* Estilos para la imagen de cada ítem */
-.additional-info-image {
-  width: 100%;
-  max-width: 300px; /* Ancho máximo */
-  height: auto;
-  margin-bottom: 15px;
-  border-radius: 5px; /* Bordes redondeados */
-}
+
+
+
+
+
+
+
+
+
+
 
 /* Estilos para la sección de blog */
 .blog-section {
@@ -430,6 +453,50 @@ button {
   padding: 20px; /* Espaciado interno */
   margin-top: 20px; /* Margen superior */
 }
+/* Estilos para el contenedor de los botones */
+.year-buttons {
+  display: flex; /* Usa flexbox para alinear los botones */
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones horizontalmente */
+  margin-top: 20px; /* Margen superior */
+}
+
+/* Estilos para los botones */
+.year-buttons button {
+  background-color: #ff0; /* Fondo amarillo */
+  color: #000; /* Texto negro */
+  border: 2px solid #000; /* Borde negro */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave para el hover */
+}
+/* Efecto hover para los botones */
+.year-buttons button:hover {
+  background-color: #48cad6; /* Fondo verde */
+  color: #000000; /* Texto blanco */
+}
+
+.download-excel-container {
+  margin-top: 20px; /* Espacio encima del contenedor del botón */
+}
+
+.download-excel-button {
+  background-color: #ff0;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 auto; /* Centra el botón dentro del contenedor */
+  display: inline-block; /* Asegura que el botón no se expanda */
+}
+
+.download-excel-button:hover {
+  background-color: #48cad6; /* Fondo verde */
+  color: #000000; /* Texto blanco */
+}
 
 /* Estilos para los días del calendario */
 .react-calendar__tile {
@@ -448,4 +515,82 @@ button {
 /* Estilos para los días del calendario en hover */
 .react-calendar__tile:hover {
   background-color: #f0f0f0; /* Fondo gris claro */
+}
+.Prueba{
+  border: 2px solid #000; /* Borde de 2px, sólido, color negro */
+border-radius: 40px; /* Bordes redondeados */
+padding: 10px; /* Espaciado interno */
+margin: 10px; /* Espaciado externo */
+border: 3px solid black; /* Es el bordo del cuadro */
+box-shadow: 0 4px 8px rgb(10, 26, 27); /* es como la sobra del cuadro  */
+background-color: white;
+}
+.Prueba2{
+  border: 2px solid #000; /* Borde de 2px, sólido, color negro */
+border-radius: 40px; /* Bordes redondeados */
+padding: 10px; /* Espaciado interno */
+margin: 10px; /* Espaciado externo */
+border: 3px solid black; /* Es el bordo del cuadro */
+box-shadow: 0 4px 8px rgb(10, 26, 27); /* es como la sobra del cuadro  */
+background-color: white;
+}
+.Prueba3 {
+  border: 3px solid black;
+  border-radius: 40px;
+  padding: 30px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgb(10, 26, 27);
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row; /* Por defecto, los elementos están en fila */
+  width: 100%; /* Ocupa el 100% del ancho del contenedor */
+  box-sizing: border-box;
+}
+button:hover {
+  background-color: #48cad6; /* Fondo verde */
+  color: #000000; /* Texto blanco en hover */
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.Prueba3 {
+  box-sizing: border-box;
+}
+
+/* Estilos dentro de la media query para teléfonos */
+@media (max-width: 768px) {
+  .Prueba3 {
+    flex-direction: column; /* Cambia la dirección de los elementos a columna en pantallas pequeñas */
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+    text-align: center; /* Centra el texto y el contenido */
+    width: 100%; /* Asegura que el div ocupa el 100% del ancho del contenedor */
+  }
+
+  .Prueba3 > * {
+    margin: 10px 0; /* Espacio vertical entre los elementos */
+  }
+
+  .Prueba3 img {
+    max-width: 100%; /* Asegura que las imágenes no se desborden del contenedor */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    display: block; /* Evita el espacio debajo de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  
+  .additional-info-item {
+    overflow: hidden; /* Oculta cualquier contenido que se desborde del contenedor */
+    text-align: center; /* Centra el texto para que se vea mejor en dispositivos pequeños */
+    margin: 10px 0; /* Espacio vertical entre los ítems */
+  }
+
+  .additional-info-image {
+    max-width: 100%; /* Asegura que la imagen no se extienda más allá del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Evita el espacio debajo de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
 }

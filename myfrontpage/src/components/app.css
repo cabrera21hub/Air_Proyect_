@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 30;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #9fcde6; /* Fondo azul */
+    color: #ffffff; /* Texto blanco */
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center;
+    padding: 10px 40px;
+    background: linear-gradient(90deg, #053955, #0b74a9); /* Gradiente de fondo */
+    border-bottom: 2px solid #fff; /* Línea divisoria blanca */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    position: fixed; /* Fija la barra de navegación */
+    width: 100%; /* Ancho completo */
+    top: 0; /* Posición en la parte superior */
+    z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+    border-radius: 0 0 15px 15px; /* Bordes redondeados */
+  }
+  
+  .nav {
+    display: flex; /* Asegúrate de usar display: flex */
+    flex-wrap: wrap; /* Permite que los ítems se envuelvan en varias líneas si es necesario */
+    justify-content: center; /* Centra los ítems horizontalmente */
+    gap: 15px; /* Espacio entre los enlaces, ajusta según sea necesario */
+    padding: 10px; /* Espaciado interno, ajusta según sea necesario */
+    margin-left: auto; /* Empuja los elementos hacia la derecha */
+    margin-right: 60px; /* Centra los elementos horizontalmente */
+  }
+  
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    color: #ff0; /* Texto amarillo */
+  }
+  
+  .logo-text span:first-child {
+    font-weight: bold;
+  }
+  
+  
+  .nav-link {
+    color: #fff; /* Texto blanco */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+    position: relative;
+    padding: 10px; /* Espaciado interno */
+    transition: all 0.3s ease; /* Transición para el hover */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  .nav-link:hover {
+    color: #ff0; /* Texto amarillo en hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco translúcido en hover */
+  }
+  
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #ff0; /* Línea amarilla */
+    bottom: -5px;
+    left: 0;
+  }
+  
+  .main-content {
+    padding: 80px 20px 20px; /* Espaciado interno ajustado para la barra fija */
+  }
+  @media (max-width: 768px) {
+    .additional-info-container {
+      flex-direction: column; /* Cambia a columna en pantallas más pequeñas */
+      align-items: center; /* Centra los ítems verticalmente */
+    }
+  }

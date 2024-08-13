@@ -37,7 +37,7 @@ const Grafica_Air = ({ data, title }) => {
     labels: labels,
     datasets: [
       {
-        label: 'Predicted PM2.5',
+        label: 'Predicciones de PM2.5',
         data: predictedPm25,
         borderColor: 'rgba(75,192,192,1)',
         backgroundColor: 'rgba(75,192,192,0.2)',
@@ -57,7 +57,7 @@ const Grafica_Air = ({ data, title }) => {
         suggestedMax: Math.max(...predictedPm25.filter(Boolean)) + 10,
         title: {
           display: true,
-          text: 'PM2.5 Level',
+          text: 'Nivel de PM2.5',
         },
       },
       x: {
