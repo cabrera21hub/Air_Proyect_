@@ -37,6 +37,7 @@ const Header = () => {
       </div>
       <nav className="nav">
         <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">INICIO</Link>
+        <Link className={`nav-link ${location.pathname === '/faq' ? 'active' : ''}`} to="/faq">PREGUNTAS FRECUENTES</Link>
         <Link className={`nav-link ${location.pathname === '/about-us' ? 'active' : ''}`} to="/about-us">ACERCA DE NOSOTROS</Link>
       </nav>
     </header>
