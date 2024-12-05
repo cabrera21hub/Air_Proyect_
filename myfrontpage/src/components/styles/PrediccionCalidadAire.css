@@ -1,0 +1,27 @@
+.prediccion-container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .prediccion-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .day-prediction {
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .day-prediction h3 {
+    color: #002366;
+    margin-bottom: 10px;
+  }
+  

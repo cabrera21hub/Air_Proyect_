@@ -11,7 +11,7 @@ const Clima = () => {
     const [load, setLoad] = useState(false);
 
     useEffect(() => {
-        fetch('http://api.weatherapi.com/v1/forecast.json?key=1fb72a14371346eb839225803230910&q=huejutla&days=5&aqi=yes&alerts=no&lang=es')
+        fetch('http://api.weatherapi.com/v1/forecast.json?key=1fb72a14371346eb839225803230910&q=Mexico City&days=5&aqi=yes&alerts=no&lang=es')
             .then(res => res.json())
             .then(obj => {
                 setData(obj);
@@ -19,7 +19,7 @@ const Clima = () => {
             })
             .catch(err => Alert.alert('Error inesperado : ' + err));
 
-        fetch('http://api.airvisual.com/v2/nearest_city?key=12bc6a9b-50e4-4db3-94ed-58d30440af97')
+        fetch('http://api.airvisual.com/v2/city?city=Mexico City&state=Mexico City&country=Mexico&key=12bc6a9b-50e4-4db3-94ed-58d30440af97')
             .then(res => res.json())
             .then(obj => {
                 setAirQuality(obj.data.current.pollution);
@@ -47,17 +47,16 @@ const Clima = () => {
 
     const Card = ({ fecha, iko, condicion, min, max }) => {
         return (
-            <View style={[styles.vContainer, { justifyContent: 'space-between' }]}>
+            <View style={[styles.vContainer, styles.card]}>
                 <View style={styles.vContainer}>
-                    <Image style={{ height: 50, width: 50 }}
-                        source={{ uri: 'https:' + iko }} />
-                    <Text style={styles.datosBold}>{fecha} </Text>
-                    <Text style={styles.datosBold}> {condicion} </Text>
+                    <Image style={styles.icon} source={{ uri: 'https:' + iko }} />
+                    <Text style={styles.datosBold}>{fecha}</Text>
+                    <Text style={styles.datosBold}>{condicion}</Text>
                 </View>
                 <View style={styles.vContainer}>
-                    <Text style={styles.datosBold}> {max}°C </Text>
-                    <Text style={styles.texto}>/</Text>
-                    <Text style={styles.datosBold}> {min}°C </Text>
+                    <Text style={styles.datosBold}>{max}°C</Text>
+                    <Text style={styles.texto}> / </Text>
+                    <Text style={styles.datosBold}>{min}°C</Text>
                 </View>
             </View>
         );
@@ -70,8 +69,7 @@ const Clima = () => {
         return (
             <View style={styles.hContainer}>
                 <Text style={styles.datosBold}>{temperatura}°</Text>
-                <Image style={{ height: 50, width: 50 }}
-                    source={{ uri: 'https:' + ico }} />
+                <Image style={styles.icon} source={{ uri: 'https:' + ico }} />
                 <Text style={styles.datos}>{vel} km/h</Text>
                 <Text style={styles.texto}>{hour}</Text>
             </View>
@@ -80,7 +78,7 @@ const Clima = () => {
 
     const Datos = ({ dato, valor }) => {
         return (
-            <View style={[styles.vContainer, { justifyContent: 'space-between', borderBottomColor: '#AFCAF3', borderBottomWidth: 0.2, paddingBottom: 3 }]}>
+            <View style={[styles.datoItem, styles.horizontalWrap]}>
                 <Text style={styles.texto}>{dato}</Text>
                 <Text style={styles.datosBold}>{valor}</Text>
             </View>
@@ -93,27 +91,27 @@ const Clima = () => {
         const textColor = airQualityColor === '#ffff00' ? '#000' : '#FFF';
 
         return (
-            <ScrollView style={styles.scrollContainer}>
+            <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContent}>
                 <View style={styles.datosContainer}>
                     <Text style={styles.lugar}>{data.location.name}</Text>
-                    <View>
-                        <View style={[styles.vContainer, { alignItems: 'center', marginBottom: -22 }]}>
+                    <View style={styles.centered}>
+                        <View style={[styles.vContainer, styles.centered]}>
                             <Text style={styles.temperatura}>{data.current.temp_c}</Text>
-                            <Text style={[styles.lugar, { marginTop: 18 }]}>°C</Text>
+                            <Text style={styles.degreeSymbol}>°C</Text>
                         </View>
 
-                        <View style={[styles.vContainer, { justifyContent: 'center' }]}>
-                            <Text style={styles.datosBold}>{data.current.condition.text} </Text>
-                            <Text style={styles.datosBold}> {data.forecast.forecastday[0].day.maxtemp_c} °C  </Text>
-                            <Text style={styles.texto}>/</Text>
-                            <Text style={styles.datosBold}> {data.forecast.forecastday[0].day.mintemp_c} °C  </Text>
+                        <View style={styles.vContainer}>
+                            <Text style={styles.datosBold}>{data.current.condition.text}</Text>
+                            <Text style={styles.datosBold}>{data.forecast.forecastday[0].day.maxtemp_c}°C</Text>
+                            <Text style={styles.texto}> / </Text>
+                            <Text style={styles.datosBold}>{data.forecast.forecastday[0].day.mintemp_c}°C</Text>
                         </View>
                     </View>
                 </View>
 
                 {/* Mostrar calidad del aire actual */}
                 {airQuality && (
-                    <View style={[styles.container, { backgroundColor: airQualityColor }]}>
+                    <View style={[styles.airQualityContainer, { backgroundColor: airQualityColor }]}>
                         <Text style={styles.title}>Calidad del Aire Actual</Text>
                         <Text style={[styles.datosBold, { color: textColor }]}>{`AQI: ${airQuality.aqius} - ${airQualityLevel}`}</Text>
                     </View>
@@ -123,16 +121,16 @@ const Clima = () => {
                     <MapView
                         style={styles.map}
                         initialRegion={{
-                            latitude: data.location.lat,
-                            longitude: data.location.lon,
+                            latitude: 19.432608,
+                            longitude: -99.133209,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
                     >
                         <Marker
                             coordinate={{
-                                latitude: data.location.lat,
-                                longitude: data.location.lon,
+                                latitude: 19.432608,
+                                longitude: -99.133209,
                             }}
                             title={data.location.name}
                             description={`Temperatura actual: ${data.current.temp_c}°C`}
@@ -140,10 +138,9 @@ const Clima = () => {
                     </MapView>
                 </View>
 
-
                 <View style={styles.container}>
                     <Text style={styles.title}>Tendencia de Calidad del Aire</Text>
-                    <View style={{ alignItems: 'center' }}>
+                    <View style={styles.centered}>
                         <ChartScreen />
                     </View>
                 </View>
@@ -156,7 +153,10 @@ const Clima = () => {
                             iko={item.day.condition.icon}
                             condicion={item.day.condition.text}
                             max={item.day.maxtemp_c}
-                            min={item.day.mintemp_c} horizontal />} />
+                            min={item.day.mintemp_c} />}
+                        keyExtractor={(item) => item.date}
+                        showsVerticalScrollIndicator={false}
+                    />
                 </View>
 
                 <View style={styles.container}>
@@ -168,35 +168,29 @@ const Clima = () => {
                             vel={item.wind_kph}
                             hora={item.time} />}
                         horizontal
-                        showsHorizontalScrollIndicator={false} />
+                        showsHorizontalScrollIndicator={false}
+                    />
                 </View>
 
-                <View style={styles.vContainer}>
-                    <View>
-                        <View style={styles.container}>
-                            <Text style={styles.datosBold}>{data.current.wind_dir}</Text>
-                            <Text style={styles.datosBold}>{data.current.wind_kph} km/h</Text>
-                        </View>
-                        <View style={styles.container}>
-                            <View style={styles.vContainer}>
-                                <Text style={styles.datosBold}>{data.forecast.forecastday[0].astro.sunrise}</Text>
-                                <Text style={styles.texto}>  Amanecer</Text>
-                            </View>
-                            <View style={styles.vContainer}>
-                                <Text style={styles.datosBold}>{data.forecast.forecastday[0].astro.sunset}</Text>
-                                <Text style={styles.texto}>  Anochecer</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={[styles.container, { marginLeft: -5 }]}>
+                <View style={styles.detailsContainer}>
+                    <View style={styles.column}>
                         <Datos dato={'Humedad'} valor={data.current.humidity + '%'} />
-                        <Datos dato={'Sensación real      '} valor={data.current.feelslike_c + '°'} />
+                        <Datos dato={'Sensación real'} valor={data.current.feelslike_c + '°'} />
                         <Datos dato={'UV'} valor={data.current.uv} />
-                        <Datos dato={'Presión'} valor={data.current.pressure_mb + 'mbar'} />
+                    </View>
+                    <View style={styles.column}>
+                        <Datos dato={'Presión'} valor={data.current.pressure_mb + ' mbar'} />
                         <Datos dato={'Prob. de lluvia'} valor={data.forecast.forecastday[0].day.daily_chance_of_rain + '%'} />
+                        <View style={styles.horizontalWrap}>
+                            <Text style={styles.datosBold}>{data.forecast.forecastday[0].astro.sunrise}</Text>
+                            <Text style={styles.texto}> Amanecer</Text>
+                        </View>
+                        <View style={styles.horizontalWrap}>
+                            <Text style={styles.datosBold}>{data.forecast.forecastday[0].astro.sunset}</Text>
+                            <Text style={styles.texto}> Anochecer</Text>
+                        </View>
                     </View>
                 </View>
-
             </ScrollView>
         );
     };

@@ -1,0 +1,280 @@
+.home-container {
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  padding: 20px; /* Espaciado interno */
+}
+
+.content {
+  display: flex; /* Uso de flexbox para organizar el contenido */
+  justify-content: space-between; /* Espacio entre elementos */
+}
+
+.left-side, .right-side {
+  margin: 10px; /* Márgenes externos */
+}
+
+.left-side {
+  flex: 2; /* Flexibilidad para ocupar 2 partes */
+  margin-right: 20px; /* Margen a la derecha */
+  display: flex; /* Uso de flexbox */
+  flex-direction: column; /* Direccionamiento vertical */
+  justify-content: space-between; /* Espacio entre elementos */
+}
+
+.right-side {
+  flex: 3; /* Flexibilidad para ocupar 3 partes */
+  display: flex; /* Uso de flexbox */
+  flex-direction: column; /* Direccionamiento vertical */
+  justify-content: flex-start; /* Alineación al inicio */
+}
+
+.title-container {
+  display: flex; /* Uso de flexbox */
+  align-items: center; /* Alineación centrada verticalmente */
+  justify-content: center; /* Alineación centrada horizontalmente */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+.city-title {
+  font-size: 1.8em; /* Tamaño de fuente grande */
+  color: #fff; /* Texto blanco */
+  font-weight: 300; /* Peso de fuente */
+  margin-left: 10px; /* Margen a la izquierda */
+}
+
+.location-icon {
+  height: 30px; /* Altura de la imagen */
+}
+
+.air-quality-title {
+  text-align: center; /* Texto centrado */
+  font-size: 1.8em; /* Tamaño de fuente grande */
+  margin-bottom: 15px; /* Margen inferior */
+  color: #fff; /* Texto blanco */
+}
+
+.description {
+  font-size: 1.1em; /* Tamaño de fuente */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.map-container {
+  margin-bottom: 10px; /* Margen inferior */
+  height: 350px; /* Altura del mapa */
+}
+
+.city-info {
+  font-size: 1em; /* Tamaño de fuente */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.faq {
+  font-size: 1.1em; /* Tamaño de fuente */
+  color: #ff0; /* Texto amarillo */
+  text-align: center; /* Texto centrado */
+}
+
+.info-cards-container {
+  display: flex; /* Uso de flexbox */
+  justify-content: space-between; /* Espacio entre elementos */
+  margin-bottom: 10px; /* Reducir el margen inferior */
+}
+
+.info-card-container {
+  flex: 1; /* Flexibilidad para ocupar espacio */
+  margin: 0 10px; /* Márgenes laterales */
+  text-align: center; /* Texto centrado */
+}
+
+.info-card {
+  background-color: #ff0; /* Fondo amarillo */
+  color: #000; /* Texto negro */
+  padding: 15px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.info-card h3 {
+  margin-bottom: 10px; /* Margen inferior */
+  font-size: 1.1em; /* Tamaño de fuente */
+  border-bottom: 2px solid #fff; /* Borde inferior */
+  display: inline-block; /* Bloque en línea */
+  padding-bottom: 5px; /* Espaciado interno inferior */
+}
+
+.info-card p {
+  font-size: 1.3em; /* Tamaño de fuente */
+  margin: 0; /* Sin margen */
+}
+
+.chart-info-container {
+  display: flex; /* Uso de flexbox */
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: flex-start; /* Alineación al inicio */
+  margin-top: 0px; /* Reducir el margen superior */
+}
+
+.chart-title-container, .date-picker-container {
+  flex: 1; /* Flexibilidad para ocupar espacio */
+  display: flex; /* Uso de flexbox */
+  flex-direction: column; /* Direccionamiento vertical */
+  align-items: center; /* Alineación centrada */
+  margin: 0 10px; /* Márgenes laterales */
+}
+
+.chart-title {
+  text-align: center; /* Texto centrado */
+  margin-bottom: 10px; /* Margen inferior */
+  color: #fff; /* Texto blanco */
+}
+
+.chart-container {
+  width: 100%; /* Ancho completo */
+  background-color: #fff; /* Fondo blanco */
+  padding: 15px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+.date-picker-container {
+  margin-top: 0px; /* Subir el calendario */
+}
+
+.forecast-container {
+  background-color: #222; /* Fondo gris oscuro */
+  padding: 15px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-top: 20px; /* Margen superior */
+}
+
+.quality-title {
+  color: #ff0; /* Texto amarillo */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+ul {
+  list-style-type: none; /* Sin viñetas */
+  padding: 0; /* Sin relleno */
+}
+
+ul li {
+  margin-bottom: 5px; /* Margen inferior */
+}
+
+.social-media-footer {
+  display: flex; /* Uso de flexbox */
+  justify-content: center; /* Alineación centrada */
+  margin-top: 20px; /* Margen superior */
+}
+
+.social-icon {
+  color: #fff; /* Iconos blancos */
+  font-size: 1.8em; /* Tamaño de fuente grande */
+  margin: 0 15px; /* Márgenes laterales */
+}
+
+.forecast-day button {
+  background-color: #ff0; /* Fondo amarillo */
+  color: #000; /* Texto negro */
+  padding: 10px 20px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano */
+  margin-top: 10px; /* Margen superior */
+}
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: #000;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Blog section styles */
+.blog-section {
+  margin-top: 40px;
+  color: #fff;
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.blog-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.blog-post {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  flex: 1 1 30%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+}
+
+.blog-content {
+  padding: 15px;
+}
+
+.blog-post-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.blog-post-content {
+  font-size: 1em;
+}
+
+/* Chart styles */
+.yearly-chart-container, .monthly-chart-container {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  color: #000;
+}
+
+.chart-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #ff0;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
